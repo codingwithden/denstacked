@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content Creator — Denisse Medina Flores</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&amp;family=Bagel+Fat+One&amp;family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Caveat:wght@600;700&amp;family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;family=Gloock&amp;family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Montserrat:ital,wght@0,400..800;1,400..800&amp;family=Pinyon+Script&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap">
+<style>
+body{margin:0;background:#3E000D;color:#3E000D}
+a{color:var(--accent)}a:hover{color:#3E000D}
+button{font-family:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #F8F1E7;outline-offset:3px}
+html{scroll-behavior:smooth}
+
+.theme-espresso,.theme-matcha,.theme-conleche{--bg:#5B0F18;--bg2:#3E000D;--accent:#5B0F18;--drink:#3E000D;--glow:rgba(248,241,231,.09);--soft:rgba(91,15,24,.07)}
+.root{transition:background-color .6s ease}
+
+/* ticket */
+.ticket-wrap{filter:drop-shadow(0 30px 40px rgba(0,0,0,.45)) drop-shadow(0 4px 6px rgba(0,0,0,.25))}
+.ticket{-webkit-mask:radial-gradient(circle at 10px 100%,transparent 7px,#000 7.5px) 0 100%/20px 51% repeat-x,linear-gradient(#000,#000) 0 0/100% 50% no-repeat;mask:radial-gradient(circle at 10px 100%,transparent 7px,#000 7.5px) 0 100%/20px 51% repeat-x,linear-gradient(#000,#000) 0 0/100% 50% no-repeat}
+.print-in{animation:printIn 1.6s cubic-bezier(.25,.8,.25,1) both}
+@keyframes printIn{from{clip-path:inset(-80px -80px 100% -80px);transform:translateY(-60px)}to{clip-path:inset(-80px -80px -80px -80px);transform:none}}
+.rule{border-top:1.5px dashed rgba(62,0,13,.45);height:0}
+.dots{flex-grow:1;border-bottom:1.5px dotted rgba(62,0,13,.35);margin:0 8px 5px;min-width:12px}
+.pill{border:1.5px solid #3E000D;background:transparent;color:#3E000D;border-radius:999px;padding:9px 14px;font-size:12px;font-weight:600;letter-spacing:.06em;min-height:40px;transition:background .2s,color .2s,transform .15s}
+.pill:hover{background:var(--soft);transform:translateY(-1px)}
+.pill:active{transform:scale(.96)}
+.row{all:unset;box-sizing:border-box;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:16px;align-items:center;width:100%;padding:18px 12px;border-radius:6px;cursor:pointer;transition:background .2s,transform .2s;animation:rowIn .45s ease both}
+.row:hover{background:var(--soft);transform:translateX(4px)}
+.row:hover .arrow{transform:translateX(4px);opacity:1}
+.row:hover .stamp{transform:rotate(0deg) scale(1.08)!important}
+.row:focus-visible{outline:2px solid #F8F1E7;outline-offset:2px}
+@keyframes rowIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.stamp{transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.arrow{transition:transform .2s,opacity .2s;opacity:.4}
+
+/* barcode */
+.barcode{position:relative;display:flex;align-items:stretch;height:64px;text-decoration:none;padding:0 6px;overflow:hidden}
+.laser{position:absolute;left:0;right:0;top:50%;height:2px;background:#5B0F18;box-shadow:0 0 10px 2px rgba(91,15,24,.6);opacity:0;pointer-events:none}
+.barcode:hover .laser,.barcode:focus-visible .laser{opacity:1;animation:scan 1s ease-in-out infinite alternate}
+@keyframes scan{from{top:6%}to{top:90%}}
+
+/* motion */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.live-dot{animation:pulse 1.6s ease-in-out infinite}
+@keyframes eq{0%,100%{height:4px}50%{height:14px}}
+.eq span{display:block;width:3px;background:var(--accent);border-radius:2px;animation:eq .8s ease-in-out infinite}
+.eq span:nth-child(2){animation-delay:.2s}.eq span:nth-child(3){animation-delay:.4s}.eq span:nth-child(4){animation-delay:.1s}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.fade-up{animation:fadeUp .45s ease both}
+.drawer{animation:slideIn .38s cubic-bezier(.2,.8,.2,1)}
+.scrim{animation:fadeIn .25s ease}
+.steam{transform-box:fill-box;transform-origin:center;animation:steam 3.2s ease-in-out infinite}
+.steam.s2{animation-delay:1s}.steam.s3{animation-delay:2s}
+@keyframes steam{0%{opacity:0;transform:translateY(10px) scaleY(.8)}35%{opacity:.85}100%{opacity:0;transform:translateY(-28px) scaleY(1.1)}}
+.float{animation:float 6s ease-in-out infinite}
+.float.f2{animation-delay:-2s;animation-duration:7s}.float.f3{animation-delay:-4s;animation-duration:8s}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(8deg)}}
+.win{animation:twinkle 5s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.9}45%{opacity:.35}60%{opacity:1}}
+.marquee{display:flex;width:max-content;animation:marquee 38s linear infinite}
+.ticker:hover .marquee{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.train{animation:ride 16s linear infinite}
+@keyframes ride{from{transform:translateX(-620px)}to{transform:translateX(1500px)}}
+.runner{animation:run 7s ease-in-out infinite}
+@keyframes run{0%{left:0%}100%{left:100%}}
+.hero-cup{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.hero-cup:hover{transform:rotate(-3deg) scale(1.03)}
+.hero-cup:active{transform:scale(.97)}
+.drink{transition:fill .6s ease}
+.bean-drop{position:absolute;top:-20px;animation:drop 1.6s cubic-bezier(.3,.6,.4,1) both}
+@keyframes drop{0%{opacity:0;transform:translateY(0) rotate(0)}15%{opacity:1}100%{opacity:0;transform:translateY(180px) rotate(260deg)}}
+.punch-pop{animation:punch .45s cubic-bezier(.3,1.8,.5,1)}
+@keyframes punch{0%{transform:scale(.6)}100%{transform:scale(1)}}
+.pin{transition:transform .25s cubic-bezier(.3,1.6,.5,1),opacity .3s}
+.pin:hover{transform:translate(-50%,-50%) scale(1.15)!important}
+.bounce{animation:bounce .6s cubic-bezier(.3,1.8,.5,1)}
+@keyframes bounce{0%{margin-top:-14px}100%{margin-top:0}}
+
+/* buttons */
+.brew{position:relative;overflow:hidden;z-index:0;transition:color .3s,transform .15s}
+.brew::before{content:'';position:absolute;left:0;right:0;bottom:0;height:0;background:#F8F1E7;transition:height .35s ease;z-index:-1}
+.brew:hover::before{height:100%}
+.brew:active{transform:scale(.97)}
+.ghost-btn{background:transparent;border:1.5px solid rgba(248,241,231,.7);color:#F8F1E7;border-radius:999px;padding:10px 16px;font-size:12px;font-weight:600;letter-spacing:.06em;min-height:44px;transition:background .2s,transform .15s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.ghost-btn:hover{background:rgba(248,241,231,.12);color:#F8F1E7}
+.ghost-btn:active{transform:scale(.97)}
+.blend-btn{border:none;background:transparent;color:#F8F1E7;border-radius:999px;padding:8px 12px;font-size:11px;font-weight:600;letter-spacing:.08em;min-height:36px;display:flex;align-items:center;gap:6px;transition:background .25s,color .25s}
+.blend-btn:hover{background:rgba(248,241,231,.12)}
+.field{width:100%;box-sizing:border-box;background:transparent;border:1.5px dashed rgba(62,0,13,.5);border-radius:4px;padding:12px;font-family:'IBM Plex Mono',monospace;font-size:14px;color:#3E000D}
+.field::placeholder{color:#5B0F18}
+.foot-link{font-size:13px;font-weight:600;letter-spacing:.05em;text-decoration:underline;text-underline-offset:4px;padding:10px 4px}
+.chalk-tab{border:1.5px solid rgba(248,241,231,.6);background:transparent;color:#F8F1E7;border-radius:999px;padding:10px 16px;font-size:12px;font-weight:600;letter-spacing:.08em;min-height:44px;transition:background .2s,color .2s,transform .15s}
+.chalk-tab:hover{background:rgba(248,241,231,.1);transform:translateY(-2px)}
+.stop{background:none;border:none;padding:0;display:flex;flex-direction:column;align-items:center;gap:10px;width:96px;text-align:center}
+.stop-dot{width:26px;height:26px;border-radius:50%;box-sizing:border-box;transition:transform .25s cubic-bezier(.3,1.6,.5,1),background .25s}
+.stop:hover .stop-dot{transform:scale(1.25)}
+.chip{border:1.5px solid #3E000D;background:transparent;color:#3E000D;border-radius:999px;padding:8px 13px;font-size:12px;font-weight:600;letter-spacing:.04em;min-height:38px;transition:background .2s,color .2s,transform .15s}
+.chip:hover{transform:translateY(-1px)}
+.slot{width:74px;height:74px;border-radius:50%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.tap-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid #F8F1E7;animation:tapPulse 1.8s ease-out infinite;pointer-events:none}
+@keyframes tapPulse{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.25);opacity:0}}
+.slot:hover{transform:rotate(-8deg) scale(1.06)}
+.lift{transition:transform .25s ease,box-shadow .25s ease}
+.lift:hover{transform:translateY(-4px);box-shadow:0 24px 50px rgba(0,0,0,.35)}
+.tool{border:1.5px solid rgba(62,0,13,.55);background:rgba(248,241,231,.85);color:#3E000D;border-radius:12px;min-height:104px;padding:12px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.08em;transition:transform .2s cubic-bezier(.3,1.6,.5,1),background .2s,color .2s,box-shadow .2s}
+.tool:hover{transform:translateY(-4px) rotate(-1.5deg);box-shadow:0 10px 20px rgba(0,0,0,.18)}
+.tool:active{transform:scale(.95)}
+.tool.dark{border-color:rgba(248,241,231,.3);background:rgba(248,241,231,.04);color:#F8F1E7}
+.tool:hover .ic-whisk{animation:whisk .35s ease-in-out infinite alternate;transform-origin:50% 10%}
+@keyframes whisk{from{transform:rotate(-22deg)}to{transform:rotate(22deg)}}
+.tool:hover .ic-knife{animation:chop .3s ease-in-out infinite alternate}
+@keyframes chop{from{transform:translateY(-4px) rotate(-6deg)}to{transform:translateY(3px) rotate(0)}}
+.tool:hover .ic-rail{animation:slideX .6s ease-in-out infinite alternate}
+@keyframes slideX{from{transform:translateX(-4px)}to{transform:translateX(4px)}}
+.tool:hover .ic-mise{animation:hop .4s ease-in-out infinite alternate}
+@keyframes hop{from{transform:translateY(0)}to{transform:translateY(-5px)}}
+.tool:hover .ic-timer{animation:ring .12s linear infinite alternate}
+@keyframes ring{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
+.tool:hover .ic-pan{animation:flip .5s ease-in-out infinite alternate;transform-origin:70% 60%}
+@keyframes flip{from{transform:rotate(0)}to{transform:rotate(-14deg) translateY(-3px)}}
+.tool:hover .ic-laptop{animation:hop .45s ease-in-out infinite alternate}
+.tool:hover .ic-code{animation:pulseS .5s ease-in-out infinite alternate}
+@keyframes pulseS{from{transform:scale(1)}to{transform:scale(1.18)}}
+.ic-term{animation:pulse 1s steps(2) infinite}
+.tool:hover .ic-kanban{animation:kan .8s ease-in-out infinite alternate}
+@keyframes kan{from{transform:translateX(0)}to{transform:translateX(11px)}}
+.tool:hover .ic-cal{animation:ring .2s linear infinite alternate}
+.ic-nfc{animation:pulse 1.4s ease-in-out infinite}
+.type{display:inline-block;white-space:pre;clip-path:inset(0 100% 0 0);animation:type .9s steps(28,end) forwards}
+@keyframes type{to{clip-path:inset(0 0 0 0)}}
+.caret{display:inline-block;width:9px;height:17px;background:#F8F1E7;animation:pulse 1s steps(2) infinite}
+.teaser .teaser-arrow{display:inline-block;transition:transform .2s}
+.teaser:hover .teaser-arrow{transform:translateX(6px)}
+.teaser:hover{color:#F8F1E7}
+.story-in{position:absolute;inset:12px;border-radius:34px;overflow:hidden;display:flex;flex-direction:column;color:#3E000D;animation:fadeIn .35s ease}
+.bar-fill{height:100%;background:#3E000D;width:0;animation:barfill 6s linear forwards}
+.bar-fill.paused{animation-play-state:paused}
+@keyframes barfill{to{width:100%}}
+.spin-slow{animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.beat{animation:beat 1.1s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.12)}30%{transform:scale(.98)}45%{transform:scale(1.08)}}
+.tile-pop{animation:tilepop .5s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes tilepop{from{transform:scale(0) rotate(-20deg)}to{transform:none}}
+.react{display:flex;align-items:center;gap:6px;min-width:44px;min-height:44px;justify-content:center;font-size:13px;font-weight:700;border-radius:999px;transition:transform .15s}
+.react:active{transform:scale(.85)}
+.chapter{display:flex;gap:16px;align-items:center;border-radius:14px;padding:16px 18px;border:1.5px solid rgba(248,241,231,.3);background:transparent;color:#F8F1E7;transition:transform .2s,background .2s}
+.chapter:hover{transform:translateX(6px);background:rgba(248,241,231,.08)}
+.polar{transition:transform .35s cubic-bezier(.3,1.6,.5,1);box-shadow:0 14px 28px rgba(0,0,0,.35)}
+.file-cover-btn:hover .p1{transform:rotate(-8deg) translate(-12px,-10px)!important}
+.file-cover-btn:hover .p2{transform:rotate(0) translateY(-18px)!important}
+.file-cover-btn:hover .p3{transform:rotate(7deg) translate(12px,-10px)!important}
+.open-btn{transition:transform .15s,box-shadow .2s;animation:glowPulse 2.2s ease-in-out infinite}
+.open-btn:hover{transform:translateY(-2px)}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(248,241,231,.45)}50%{box-shadow:0 0 0 10px rgba(248,241,231,0)}}
+.file-open{animation:fileOpen .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes fileOpen{from{opacity:0;transform:scale(.96) translateY(30px)}to{opacity:1;transform:none}}
+.layer-in{animation:fadeUp .5s ease both}
+.tab-btn{border:none;cursor:pointer;transition:transform .2s,filter .2s}
+.tab-btn:hover{transform:translateY(-3px);filter:brightness(1.05)}
+.goal{display:flex;align-items:center;gap:12px;width:100%;border-radius:12px;padding:12px 14px;min-height:52px;transition:transform .15s,background .2s}
+.goal:hover{transform:translateX(4px)}
+.track{display:flex;gap:8px;align-items:center;border:none;border-radius:8px;padding:10px 12px;min-height:44px;font-size:14px;font-weight:600;transition:background .2s,transform .15s}
+.track:hover{transform:translateX(4px)}
+.reel-spin{animation:spin 2.4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:980px){.deco{display:none}}
+.vogue{font-family:'Bodoni Moda',Didot,'Bodoni 72',serif;font-weight:500;letter-spacing:-.01em}
+.vogue em,h2 em,h1 em{font-style:italic;font-weight:400}
+.nyon{font-family:Fraunces,Georgia,serif!important;font-weight:900!important;font-variation-settings:'SOFT' 100,'WONK' 1;letter-spacing:-.025em}
+body{font-family:'Montserrat',system-ui,sans-serif!important}
+.mono,.ticket,.ticket-wrap,.barcode,.field{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.headline{font-family:Fraunces,Georgia,serif!important;font-weight:900!important;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:clamp(44px,6vw,78px)!important;line-height:.98!important;letter-spacing:-.035em}
+.headline em{font-family:'Pinyon Script',cursive;font-style:normal;font-weight:400;font-size:1.18em;letter-spacing:0;color:#F8F1E7;padding:0 .06em}
+.script{font-family:'Pinyon Script',cursive!important;font-weight:400!important;font-style:normal!important;letter-spacing:0!important;font-size:1.06em}
+.seasons{font-family:'Playfair Display',Georgia,serif}
+.sc{font-family:'Playfair Display SC',Georgia,serif!important}
+.headline{font-family:'Gloock',Georgia,serif!important;font-weight:400!important;font-variation-settings:normal!important;letter-spacing:-.02em!important}
+.headline em{font-family:'Pinyon Script',cursive;color:#F8F1E7}
+.retro{font-family:'Bagel Fat One',cursive!important;font-weight:400!important;font-style:normal!important;letter-spacing:.005em!important;color:#F8F1E7}
+.retro-ink{font-family:'Bagel Fat One',cursive!important;font-weight:400!important;color:#5B0F18}
+.choed{font-family:'Abril Fatface',Georgia,serif!important;font-weight:400!important;letter-spacing:.02em;text-transform:uppercase}
+.vogue,.vg{font-family:'Bodoni Moda',Didot,serif!important}
+.vg{font-style:italic;font-weight:500}
+.word{background:none;border:none;padding:4px 6px;font-family:'Bodoni Moda',Didot,serif;font-style:italic;font-weight:600;font-size:clamp(40px,6.5vw,92px);line-height:1;color:transparent;-webkit-text-stroke:1.5px #F8F1E7;transition:color .3s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.word:hover{transform:translateY(-4px) rotate(-2deg);color:rgba(248,241,231,.25)}
+.word.choed{font-family:'Abril Fatface',serif;font-style:normal}
+.sticker{position:relative;border:none;padding:0;width:100%;aspect-ratio:1/1;perspective:900px;background:none}
+.sticker-inner{position:absolute;inset:0;transition:transform .6s cubic-bezier(.3,1.3,.5,1);transform-style:preserve-3d}
+.sticker:hover .sticker-inner{transform:rotate(-6deg) scale(1.05)}
+.st-face{position:absolute;inset:0;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;box-sizing:border-box;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.st-back{transform:rotateY(180deg)}
+.tip-pop{animation:tipPop .7s cubic-bezier(.3,1.8,.5,1) both}
+@keyframes tipPop{0%{transform:scale(.4) rotate(-12deg);opacity:0}100%{transform:rotate(-4deg);opacity:1}}
+.drink-btn{background:none;border:none;padding:0;display:flex;align-items:center;gap:18px;width:100%;text-align:left;color:#F8F1E7;transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+.drink-btn img{height:120px;width:auto;transition:transform .35s cubic-bezier(.3,1.5,.5,1),filter .3s;filter:drop-shadow(0 12px 14px rgba(0,0,0,.35))}
+.drink-btn:hover img{transform:rotate(-6deg) scale(1.08)}
+.drink-btn:hover{transform:translateX(6px)}
+.hero-img{animation:float 6s ease-in-out infinite;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45))}
+.porta{background:none;border:none;padding:0;display:flex;flex-direction:column;align-items:center;gap:10px;color:#F8F1E7;transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+.porta img{width:100%;max-width:230px;filter:drop-shadow(0 16px 18px rgba(0,0,0,.4));transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+.porta:hover img{transform:rotate(-12deg) scale(1.06)}
+.acc{display:flex;gap:16px;align-items:flex-start;width:100%;text-align:left;background:none;border:none;border-top:1.5px solid rgba(248,241,231,.25);padding:18px 4px;color:#F8F1E7;transition:background .2s}
+.acc:hover{background:rgba(248,241,231,.05)}
+.nav-link{position:relative;color:#F8F1E7;text-decoration:none;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;letter-spacing:.02em;padding:10px 16px;border-radius:999px;transition:background .25s,color .25s,transform .2s;white-space:nowrap;min-height:40px;box-sizing:border-box;display:inline-flex;align-items:center;gap:8px}
+.nav-link:hover{background:rgba(248,241,231,.12);color:#F8F1E7;transform:translateY(-1px)}
+.nav-link.is-active{background:#F8F1E7;color:#3E000D}
+.nav-link .nav-idx{font-size:10px;opacity:.55;font-weight:700}
+.nav-mono{font-family:'Abril Fatface',serif;font-size:17px;color:#F8F1E7;text-decoration:none;padding:6px 14px 6px 12px;border-right:1px solid rgba(248,241,231,.2);margin-right:4px;letter-spacing:.04em}
+.nav-mono:hover{color:#F8F1E7}
+.next-card{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;box-sizing:border-box;padding:40px 44px;border-radius:28px;border:1.5px solid rgba(248,241,231,.28);color:#F8F1E7;text-decoration:none;background:linear-gradient(100deg,rgba(248,241,231,.08),rgba(248,241,231,0));transition:background .35s,transform .35s cubic-bezier(.3,1.4,.5,1)}
+.next-card:hover{background:linear-gradient(100deg,rgba(248,241,231,.16),rgba(248,241,231,.02));transform:translateY(-4px);color:#F8F1E7}
+.next-arrow{width:84px;height:84px;border-radius:50%;background:#F8F1E7;color:#3E000D;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .45s cubic-bezier(.3,1.6,.5,1)}
+.next-card:hover .next-arrow{transform:translateX(10px) rotate(-45deg)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+
+<div class="root theme-espresso" style="width: 100%; min-height: 4600px; background: transparent; display: flex; flex-direction: column; align-items: center; box-sizing: border-box; overflow: hidden">
+  <div aria-hidden="true" style="{{ombreStyle}}"></div>
+  <div aria-hidden="true" style="{{barStyle}}"></div>
+  <nav aria-label="Pages" style="position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 45; display: flex; align-items: center; gap: 2px; padding: 6px; border-radius: 999px; background: rgba(62,0,13,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(248,241,231,.22); box-shadow: 0 12px 30px rgba(0,0,0,.3); max-width: calc(100% - 24px); box-sizing: border-box; overflow-x: auto">
+    <a class="nav-mono" href="Main.dc.html" aria-label="Denisse Medina Flores home">DMF</a><a class="nav-link" href="Main.dc.html"><span class="nav-idx">01</span>Work</a><a class="nav-link" href="About.dc.html"><span class="nav-idx">02</span>About</a><a class="nav-link" href="Kitchen.dc.html"><span class="nav-idx">03</span>Kitchen</a><a class="nav-link is-active" href="Content.dc.html" aria-current="page"><span class="nav-idx">04</span>Content</a>
+  </nav>
+
+
+  <div style="height: 70px"></div>
+
+  <!-- hero -->
+  <section style="width: 100%; max-width: 1120px; padding: 56px 16px 0; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 32px">
+    <div class="fade-up" style="flex: 1 1 460px; display: flex; flex-direction: column; gap: 20px; color: #F8F1E7">
+      <span style="font-size: 12px; letter-spacing: .24em; font-weight: 600">04 · CONTENT · DENSDIGITALDIARY</span>
+      <h1 class="retro" style="margin: 0; font-size: clamp(56px, 7.5vw, 100px); line-height: .92">Content<br><span class="script">Creator</span></h1>
+      <p style="margin: 0; font-size: 16px; line-height: 1.7; max-width: 520px; color: rgba(248,241,231,.88)">It started on Lemon8. Now it's DensDigitalDiary across TikTok, YouTube, Instagram and Lemon8, plus UGC for startups like Love8 and xTiles.</p>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap">
+        <a class="ghost-btn" href="#drinks">THE DRINK MENU</a>
+        <a class="ghost-btn" href="#creator">CREATOR ERA</a>
+        <a class="ghost-btn" href="#history">CREATOR HISTORY</a>
+      </div>
+    </div>
+    <div style="flex: 1 1 380px; display: flex; justify-content: center; align-items: flex-end; height: 440px; position: relative">
+      <img class="hero-img" src="/_blob/ddd33cd3b1876572900db05153b12da1" alt="" style="height: 330px; transform: rotate(-8deg); margin-right: -30px; animation-delay: -2s">
+      <img class="hero-img" src="/_blob/bce342b6abd4b2edcf1e303850ff3c25" alt="" style="height: 400px; position: relative; z-index: 2">
+      <img class="hero-img" src="/_blob/457c7ec9afab22acce3e5a5ea79f4344" alt="" style="height: 330px; transform: rotate(8deg); margin-left: -30px; animation-delay: -4s">
+    </div>
+  </section>
+
+  <!-- ===== DRINK MENU ===== -->
+  <section id="drinks" style="width: 100%; max-width: 1120px; padding: 120px 16px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 26px">
+    <div style="display: flex; flex-direction: column; gap: 8px; color: #F8F1E7">
+      <span style="font-size: 12px; letter-spacing: .24em; font-weight: 600; opacity: .8">01 · THE DRINK MENU</span>
+      <h2 class="headline" style="margin: 0">Pick a drink, get a <em>series</em></h2>
+      <p style="margin: 0; font-size: 15px; color: rgba(248,241,231,.82); max-width: 640px">Every drink on the menu pours one of my DensDigitalDiary series. Tap a cup.</p>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: stretch">
+      <div style="flex: 0 1 380px; display: flex; flex-direction: column; gap: 6px; background: #3E000D; border-radius: 22px; padding: 22px 26px; outline: 1.5px solid rgba(248,241,231,.25); outline-offset: -1.5px">
+        <sc-for list="{{drinks}}" as="dr" hint-placeholder-count="6">
+          <button class="drink-btn" onClick="{{dr.pick}}" aria-pressed="{{dr.pressed}}" style="{{dr.style}}">
+            <img src="{{dr.img}}" alt="" style="{{dr.imgStyle}}">
+            <span style="display: flex; flex-direction: column; gap: 4px">
+              <span style="font-size: 11px; letter-spacing: .16em; font-weight: 700; opacity: .75">{{dr.n}}</span>
+              <span class="vg" style="font-size: 26px; line-height: 1.05">{{dr.name}}</span>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+      <sc-for list="{{drinks}}" as="dr" hint-placeholder-count="1">
+        <sc-if value="{{dr.active}}" hint-placeholder-val="{{ true }}">
+          <div class="fade-up" style="flex: 1 1 420px; background: #F8F1E7; color: #5B0F18; border-radius: 22px; padding: 36px; display: flex; flex-direction: column; gap: 16px; position: relative; overflow: hidden; min-height: 520px; box-sizing: border-box">
+            <span style="font-size: 12px; letter-spacing: .2em; font-weight: 700">NOW POURING · {{dr.name}}</span>
+            <span class="retro-ink" style="font-size: clamp(44px, 5.5vw, 72px); line-height: .95">{{dr.series}}</span>
+            <p class="vg" style="margin: 0; font-size: 24px; line-height: 1.35; max-width: 460px">{{dr.desc}}</p>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap">
+              <sc-for list="{{dr.tags}}" as="tg" hint-placeholder-count="3"><span style="font-size: 11px; letter-spacing: .12em; font-weight: 700; padding: 7px 12px; border-radius: 999px; border: 1.5px solid #5B0F18">{{tg}}</span></sc-for>
+            </div>
+            <a href="#" style="align-self: flex-start; margin-top: auto; background: #5B0F18; color: #F8F1E7; text-decoration: none; border-radius: 999px; padding: 13px 20px; font-size: 12px; font-weight: 700; letter-spacing: .12em">WATCH THE SERIES [LINK] ↗</a>
+            <img class="hero-img" src="{{dr.img}}" alt="" style="position: absolute; right: -10px; bottom: -20px; height: 340px; opacity: .95; pointer-events: none">
+          </div>
+        </sc-if>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ===== CREATOR ERA ===== -->
+  <section id="creator" style="width: 100%; max-width: 1120px; padding: 120px 16px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; flex-direction: column; gap: 8px; color: #F8F1E7">
+      <span style="font-size: 12px; letter-spacing: .24em; color: #F8F1E7; font-weight: 600">02 · CREATOR ERA</span>
+      <h2 class="headline" style="margin: 0">It all started on <em>Lemon8</em></h2>
+      <p style="margin: 0; font-size: 15px; line-height: 1.6; color: rgba(248,241,231,.82); max-width: 640px">From my first posts to making UGC for startups. Tap through the stories.</p>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center">
+      <div style="flex: 0 0 320px; height: 620px; background: #3E000D; border-radius: 44px; padding: 12px; box-sizing: border-box; box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 0 0 2px #5B0F18; position: relative">
+        <sc-for list="{{stories}}" as="st" hint-placeholder-count="1">
+          <sc-if value="{{st.active}}" hint-placeholder-val="{{ true }}">
+            <div class="story-in" style="{{st.bg}}">
+              <div style="display: flex; gap: 4px; padding: 18px 16px 0">
+                <sc-for list="{{storyBars}}" as="sb" hint-placeholder-count="3">
+                  <div style="flex: 1; height: 3px; border-radius: 2px; background: rgba(62,0,13,.2); overflow: hidden"><div class="{{sb.cls}}" style="{{sb.style}}"></div></div>
+                </sc-for>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px 0">
+                <div style="display: flex; align-items: center; gap: 8px"><span style="width: 30px; height: 30px; border-radius: 50%; background: #3E000D; color: #F8F1E7; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">DMF</span><span style="font-size: 12px; font-weight: 700">densdigitaldiary</span></div>
+                <button onClick="{{toggleStory}}" aria-label="{{storyPauseLabel}}" style="background: rgba(62,0,13,.12); border: none; border-radius: 999px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: #3E000D">
+                  <sc-if value="{{storyPlaying}}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg></sc-if>
+                  <sc-if value="{{storyPaused}}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5v14l11-7z"></path></svg></sc-if>
+                </button>
+              </div>
+              <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 0 22px">
+                <sc-if value="{{st.isLemon}}" hint-placeholder-val="{{ true }}">
+                  <svg class="spin-slow" width="110" height="110" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#F8F1E7" stroke="#3E000D" stroke-width="3"></circle><circle cx="50" cy="50" r="36" fill="#F8F1E7"></circle><g stroke="#5B0F18" stroke-width="3"><path d="M50 16V84M16 50H84M26 26L74 74M74 26L26 74"></path></g><circle cx="50" cy="50" r="5" fill="#F8F1E7"></circle></svg>
+                </sc-if>
+                <sc-if value="{{st.isLove}}" hint-placeholder-val="{{ false }}">
+                  <svg class="beat" width="110" height="110" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 86S12 64 12 38a19 19 0 0 1 38 -8a19 19 0 0 1 38 8c0 26 -38 48 -38 48z" fill="#3E000D"></path><text x="50" y="56" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="20" font-weight="700" fill="#F8F1E7">UGC</text></svg>
+                </sc-if>
+                <sc-if value="{{st.isTiles}}" hint-placeholder-val="{{ false }}">
+                  <div style="display: grid; grid-template-columns: repeat(3, 34px); gap: 6px">
+                    <span class="tile-pop" style="height: 34px; border-radius: 8px; background: #3E000D; display: block"></span><span class="tile-pop" style="height: 34px; border-radius: 8px; background: #F8F1E7; display: block; animation-delay: .1s"></span><span class="tile-pop" style="height: 34px; border-radius: 8px; background: #3E000D; display: block; animation-delay: .2s"></span>
+                    <span class="tile-pop" style="height: 34px; border-radius: 8px; background: #F8F1E7; display: block; animation-delay: .3s"></span><span class="tile-pop" style="height: 34px; border-radius: 8px; background: #F8F1E7; display: block; animation-delay: .4s"></span><span class="tile-pop" style="height: 34px; border-radius: 8px; background: #F8F1E7; display: block; animation-delay: .5s"></span>
+                  </div>
+                </sc-if>
+                <span style="font-size: 11px; letter-spacing: .18em; font-weight: 700">{{st.kicker}}</span>
+                <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 34px; font-weight: 700; line-height: 1.02">{{st.title}}</span>
+                <span style="font-size: 14px; line-height: 1.55">{{st.body}}</span>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap">
+                  <sc-for list="{{st.chips}}" as="ch" hint-placeholder-count="2"><span style="font-size: 10px; letter-spacing: .1em; font-weight: 700; padding: 5px 9px; border-radius: 999px; border: 1.5px solid #3E000D">{{ch}}</span></sc-for>
+                </div>
+                <span style="font-size: 12px; font-style: italic; opacity: .75">{{st.metric}}</span>
+              </div>
+              <div style="display: flex; justify-content: space-around; padding: 14px 0 22px; border-top: 1.5px solid rgba(62,0,13,.12)">
+                <button class="react" onClick="{{like}}" aria-label="Like" style="{{likeStyle}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"></path></svg><span>{{likeCount}}</span></button>
+                <button class="react" onClick="{{prevStory}}" aria-label="Previous story" style="background: none; border: none; color: #3E000D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></button>
+                <button class="react" onClick="{{nextStory}}" aria-label="Next story" style="background: none; border: none; color: #3E000D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button>
+              </div>
+            </div>
+          </sc-if>
+        </sc-for>
+      </div>
+      <div style="flex: 1 1 380px; max-width: 520px; display: flex; flex-direction: column; gap: 12px">
+        <sc-for list="{{stories}}" as="st" hint-placeholder-count="3">
+          <button class="chapter" onClick="{{st.pick}}" aria-pressed="{{st.pressed}}" style="{{st.rowStyle}}">
+            <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 30px; font-weight: 700; flex: none; width: 44px">{{st.n}}</span>
+            <span style="display: flex; flex-direction: column; gap: 4px; text-align: left">
+              <span style="font-size: 16px; font-weight: 700">{{st.brand}}</span>
+              <span style="font-size: 13px; line-height: 1.45; opacity: .8">{{st.short}}</span>
+            </span>
+          </button>
+        </sc-for>
+        <div style="margin-top: 8px; border: 1.5px dashed rgba(248,241,231,.4); border-radius: 12px; padding: 18px; color: #F8F1E7; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 11px; letter-spacing: .18em; font-weight: 700; color: #F8F1E7">WHAT CREATING TAUGHT THE PM IN ME</span>
+          <span style="font-size: 14px; line-height: 1.6">Hooks are value props. Comments are user research. Watch-time drop-off is a funnel. Every post is a tiny A/B test.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HISTORY ===== -->
+  <section id="history" style="width: 100%; max-width: 1120px; padding: 120px 16px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; color: #F8F1E7">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: 12px; letter-spacing: .24em; font-weight: 600; opacity: .8">03 · CREATOR HISTORY</span>
+        <h2 class="headline" style="margin: 0">Behind the <em>camera</em></h2>
+      </div>
+      <img class="hero-img" src="/_blob/7cb4f72bfc2009dd917147eae0e24cbc" alt="" style="height: 190px">
+    </div>
+    <div style="display: flex; flex-direction: column; border-bottom: 1.5px solid rgba(248,241,231,.25)">
+      <sc-for list="{{history}}" as="hs" hint-placeholder-count="6">
+        <button class="acc" onClick="{{hs.pick}}" aria-expanded="{{hs.pressed}}">
+          <span class="choed" style="font-size: 22px; flex: 0 0 110px">{{hs.when}}</span>
+          <span style="display: flex; flex-direction: column; gap: 8px; flex: 1">
+            <span class="vg" style="font-size: 28px; line-height: 1.1">{{hs.title}}</span>
+            <span style="font-size: 12px; letter-spacing: .12em; font-weight: 600; opacity: .75">{{hs.org}}</span>
+            <sc-if value="{{hs.open}}" hint-placeholder-val="{{ false }}"><span class="fade-up" style="font-size: 15px; line-height: 1.6; max-width: 720px">{{hs.body}}</span></sc-if>
+          </span>
+          <span style="font-size: 26px; flex: none; transition: transform .3s; {{hs.iconStyle}}">+</span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ===== PASTRY CASE ===== -->
+  <section style="width: 100%; max-width: 1120px; padding: 120px 16px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; flex-direction: column; gap: 8px; color: #F8F1E7">
+      <span style="font-size: 12px; letter-spacing: .24em; font-weight: 600; opacity: .8">04 · THE PASTRY CASE</span>
+      <h2 class="headline" style="margin: 0">Growth &amp; <em>creative</em></h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px">
+      <sc-for list="{{pastry}}" as="pc" hint-placeholder-count="6">
+        <div class="lift" style="background: #3E000D; color: #F8F1E7; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px; outline: 1.5px solid rgba(248,241,231,.25); outline-offset: -1.5px">
+          <span class="retro" style="font-size: 30px; line-height: 1">{{pc.tag}}</span>
+          <span class="vg" style="font-size: 24px; line-height: 1.1">{{pc.name}}</span>
+          <span style="font-size: 14px; line-height: 1.55; opacity: .85">{{pc.note}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+    <section style="width: 100%; max-width: 1120px; padding: 130px 16px 0; box-sizing: border-box">
+    <a class="next-card" href="Main.dc.html">
+      <span style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 12px; letter-spacing: .24em; font-weight: 600; opacity: .75">UP NEXT</span>
+        <span class="headline" style="font-size: clamp(40px, 5.5vw, 72px)">The work</span>
+        <span style="font-size: 15px; opacity: .8">Back to the ticket: product, code and case studies.</span>
+      </span>
+      <span class="next-arrow"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></span>
+    </a>
+  </section>
+
+  <footer style="width: 100%; margin-top: 90px; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 50px 16px 40px; box-sizing: border-box; text-align: center; color: #F8F1E7; border-top: 1px solid rgba(248,241,231,.18)">
+    <span class="script" style="font-size: 40px">see you on the feed.</span>
+    <span style="font-size: 12px; letter-spacing: .1em; opacity: .6">MADE IN THE BRONX · © 2026 DENISSE MEDINA FLORES</span>
+  </footer>
+
+  <sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
+    <div role="status" class="fade-up" style="position: fixed; bottom: 28px; left: 50%; margin-left: -190px; width: 380px; max-width: calc(100% - 32px); box-sizing: border-box; text-align: center; background: #3E000D; color: #F8F1E7; padding: 14px 20px; border-radius: 8px; font-size: 13px; z-index: 60; border-left: 4px solid #F8F1E7">{{toast}}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4600}}'>
+var TOOLS = [
+  { id: 'whisk', station: 'THE LINE', label: 'WHISK', skill: 'ITERATION', title: 'Blend until smooth', file: 'recipe.js', body: 'In the kitchen you taste, adjust and whisk again. In product I fold user feedback into every release until the lumps are gone.', code: ['while (!smooth) {', '  const notes = taste(batch);', '  batch = whisk(batch, notes);', '}'] },
+  { id: 'knife', station: 'THE LINE', label: "CHEF'S KNIFE", skill: 'PRIORITIZATION', title: 'Cut to what matters', file: 'mvp.js', body: "A clean cut beats a busy plate. I scope MVPs the same way: trim anything that doesn't earn its place.", code: ['const mvp = backlog', '  .filter(f => f.impact > f.effort)', '  .slice(0, 3);'] },
+  { id: 'rail', station: 'THE LINE', label: 'TICKET RAIL', skill: 'BACKLOG FLOW', title: 'Fire in the right order', file: 'rail.js', body: 'Tickets on the rail go out in the order the table needs them. A backlog works the same way.', code: ['rail.sort(byPriority);', 'rail.forEach(ticket => fire(ticket));'] },
+  { id: 'mise', station: 'THE LINE', label: 'MISE EN PLACE', skill: 'SPRINT PLANNING', title: 'Everything in its place', file: 'sprint.js', body: 'Prep before service, not during it. Clear requirements and a groomed board make a sprint feel calm.', code: ['sprint.plan({', '  prepFirst: true,', '  blockers: resolveBefore(kickoff),', '});'] },
+  { id: 'timer', station: 'THE LINE', label: 'KITCHEN TIMER', skill: 'DEADLINES & PACE', title: 'Everything is due at 7:15', file: 'launch.js', body: "Service doesn't move. I learned to pace a team toward a fixed moment and still plate something good.", code: ['setTimeout(ship, launchDay);', '// no burnt edges'] },
+  { id: 'pan', station: 'THE LINE', label: 'SAUTÉ PAN', skill: 'CALM UNDER HEAT', title: 'Six pans, one pair of hands', file: 'service.js', body: 'Large-scale corporate catering for clients like Goldman Sachs and Google is multitasking with consequences. Now it is juggling engineering, design and community ops without dropping one.', code: ['await Promise.all([', '  design, engineering, communityOps', ']);'] }
+];
+var STORIES = [
+  { brand: 'Lemon8', kicker: 'CHAPTER 01 · LEMON8', title: 'Where it all started', short: 'My first posts, and where I found my voice as a creator.', body: 'Lemon8 is where I first started posting and found my voice as a creator. It grew into DensDigitalDiary across TikTok, YouTube and Instagram.', chips: ['CREATOR', 'LIFESTYLE', 'TECH'], metric: '[FIRST POST DATE / FOLLOWERS / BEST POST]', bg: 'background:linear-gradient(160deg,#F8F1E7 0%,#F8F1E7 60%,#F8F1E7 100%)', kind: 'lemon' },
+  { brand: 'Love8', kicker: 'CHAPTER 02 · UGC · LOVE8', title: 'Creating for startups', short: 'UGC to help an early-stage startup reach new users.', body: 'Brands started asking me to make content for them. With Love8, I created UGC to help an early-stage startup reach new users.', chips: ['UGC', 'USER ACQUISITION'], metric: '[DELIVERABLES / RESULTS]', bg: 'background:linear-gradient(160deg,#F8F1E7 0%,#F8F1E7 60%,#F8F1E7 100%)', kind: 'love' },
+  { brand: 'xTiles', kicker: 'CHAPTER 03 · UGC · XTILES', title: 'Content that converts', short: 'UGC built around the conversion funnel.', body: 'For xTiles, I made content that shows the product in real use, so viewers go from scrolling to trying it.', chips: ['UGC', 'CONVERSION'], metric: '[DELIVERABLES / RESULTS]', bg: 'background:linear-gradient(160deg,#F8F1E7 0%,#F8F1E7 60%,#F8F1E7 100%)', kind: 'tiles' }
+];
+var DRINKS = [
+  { name: 'Iced Matcha Latte', img: '/_blob/ddd33cd3b1876572900db05153b12da1', series: 'Project Me', desc: 'An 84-day series on TikTok, with recaps on Instagram and YouTube.', tags: ['TIKTOK', 'IG', 'YOUTUBE'] },
+  { name: 'Iced Mocha', img: '/_blob/c5cb8d6016c0c606c99579d2490a8116', series: 'Real Talk With Den', desc: 'Unfiltered conversations about work, life and building.', tags: ['TALK', 'LIFESTYLE'] },
+  { name: 'Caramel Macchiato', img: '/_blob/457c7ec9afab22acce3e5a5ea79f4344', series: 'Tech With Den', desc: 'Tech, tools and building in public, from code to product.', tags: ['TECH', 'PRODUCT'] },
+  { name: 'Iced Latte', img: '/_blob/94f1e8d48308163d8fe412b89ebec9e4', series: 'Small Business Saturdays', desc: 'Spotlighting small businesses and the people behind them.', tags: ['COMMUNITY', 'SMALL BIZ'] },
+  { name: 'Tiramisu Latte', img: '/_blob/7cb4f72bfc2009dd917147eae0e24cbc', series: 'Marathon Training', desc: 'The road to the TCS NYC Marathon, November 7, 2027.', tags: ['RUNNING', 'NYC'] },
+  { name: 'Cold Brew', img: '/_blob/bce342b6abd4b2edcf1e303850ff3c25', series: '12 Wishes', desc: '[WHAT 12 WISHES IS ABOUT, IN YOUR WORDS]', tags: ['SERIES'] }
+];
+var HISTORY = [
+  { when: 'START', title: 'First posts on Lemon8', org: 'Where it all started', body: 'Lemon8 is where I first started posting and found my voice as a creator. It grew into DensDigitalDiary.' },
+  { when: '2024', title: 'Independent UGC Creator', org: 'Brand collaborator · since March 2024', body: 'Data-driven content for brands like xTiles and Love8 to drive awareness, engagement and app downloads.' },
+  { when: '2.5 YRS', title: 'Social Media Manager & Brand Strategist', org: 'Freelance · most recently Jan–Jun 2026', body: 'Social presence, rollout strategy and audience engagement for independent music talent (e.g. BLACKD0G / Elyan) and independent brands.' },
+  { when: 'NOW', title: 'DensDigitalDiary', org: 'TikTok · YouTube · Instagram · Lemon8', body: 'A lifestyle and wellness platform documenting a first-gen Latina founder navigating tech, product, fitness and lifestyle design.' }
+];
+var PASTRY = [
+  { tag: '2.5Y', name: 'Social media strategy', note: 'Freelance SMM for independent music talent and brands.' },
+  { tag: 'DDD', name: 'Content creation', note: 'Started on Lemon8; now DensDigitalDiary on TikTok, YouTube, Instagram and Lemon8.' },
+  { tag: 'UGC', name: 'UGC for startups', note: 'Love8, xTiles: acquisition and conversion content.' },
+  { tag: 'IRL', name: 'Community activations', note: 'Work & Brew pop-up cafés with games, artist merch and postcards.' },
+  { tag: 'EVT', name: 'Event marketing', note: 'Career-center events and Canva promo at Lehman College.' },
+  { tag: 'EN/ES', name: 'Bilingual storytelling', note: 'Content and workshops in English y en español.' }
+];
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { time: '', drink: 0, story: 0, storyPaused: false, liked: false, tool: 'whisk', hist: 0, toast: '' };
+  }
+  componentDidMount() {
+    var self = this;
+    this.onScroll = function () {
+      if (self.rafS) return;
+      self.rafS = requestAnimationFrame(function () {
+        self.rafS = 0;
+        var d = document.documentElement, max = Math.max(1, d.scrollHeight - window.innerHeight);
+        var p = Math.min(1, Math.max(0, (window.scrollY || d.scrollTop) / max));
+        if (Math.abs(p - (self.state.sp || 0)) > 0.004) self.setState({ sp: p });
+      });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onScroll();
+    var tick = function () { self.setState({ time: new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit' }) }); };
+    tick();
+    this.clock = setInterval(tick, 15000);
+    this.storyClock = setInterval(function () { if (!self.state.storyPaused) { self.setState({ story: (self.state.story + 1) % STORIES.length }); } }, 6000);
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this.onScroll); clearInterval(this.clock); clearInterval(this.storyClock); clearTimeout(this.toastT); }
+  mix(a, b, t) {
+    var pa = [1, 3, 5].map(function (i) { return parseInt(a.substr(i, 2), 16); }), pb = [1, 3, 5].map(function (i) { return parseInt(b.substr(i, 2), 16); });
+    return 'rgb(' + pa.map(function (v, i) { return Math.round(v + (pb[i] - v) * t); }).join(',') + ')';
+  }
+  scrollVals() {
+    var p = this.state.sp || 0;
+    var base = this.mix('#5B0F18', '#3E000D', p * 0.75);
+    var light = this.mix('#5B0F18', '#F8F1E7', 0.22 * (1 - p));
+    var mid = Math.round(45 - p * 30);
+    return {
+      ombreStyle: 'position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at ' + Math.round(p * 100) + '% 0%, rgba(248,241,231,' + (0.10 * (1 - p)).toFixed(3) + '), transparent 60%), linear-gradient(100deg,' + light + ' 0%,' + base + ' ' + mid + '%,#3E000D 100%)',
+      barStyle: 'position:fixed;top:0;left:0;height:4px;z-index:50;pointer-events:none;border-radius:0 4px 4px 0;background:linear-gradient(90deg,rgba(248,241,231,.35),#F8F1E7);width:' + (p * 100).toFixed(2) + '%'
+    };
+  }
+  renderVals() {
+    var self = this, s = this.state;
+    var toolVals = {};
+    TOOLS.forEach(function (t) {
+      var on = s.tool === t.id;
+      toolVals['t_' + t.id] = { pressed: on ? 'true' : 'false', style: on ? 'background:var(--accent);color:#F8F1E7;border-color:var(--accent)' : '', pick: function () { self.setState({ tool: t.id }); } };
+    });
+    return Object.assign(toolVals, {
+      time: s.time,
+      drinks: DRINKS.map(function (d, i) {
+        var on = s.drink === i;
+        return { n: '0' + (i + 1), name: d.name, img: d.img, series: d.series, desc: d.desc, tags: d.tags, active: on, pressed: on ? 'true' : 'false',
+          style: on ? 'transform:translateX(10px)' : 'opacity:.72',
+          imgStyle: on ? 'transform:rotate(-8deg) scale(1.12)' : '',
+          pick: function () { self.setState({ drink: i }); } };
+      }),
+      tools: TOOLS.map(function (t) {
+        return { active: s.tool === t.id, label: t.label, skill: t.skill, title: t.title, body: t.body,
+          lines: t.code.map(function (c, i) { return { n: i + 1, text: c, style: 'animation-delay:' + (i * 0.6) + 's' }; }) };
+      }),
+      history: HISTORY.map(function (h, i) {
+        var on = s.hist === i;
+        return { when: h.when, title: h.title, org: h.org, body: h.body, open: on, pressed: on ? 'true' : 'false',
+          iconStyle: on ? 'transform:rotate(45deg)' : '', pick: function () { self.setState({ hist: on ? -1 : i }); } };
+      }),
+      pastry: PASTRY,
+      stories: STORIES.map(function (st, i) {
+        var on = s.story === i;
+        return { active: on, pressed: on ? 'true' : 'false', n: '0' + (i + 1), brand: st.brand, short: st.short, kicker: st.kicker, title: st.title, body: st.body, chips: st.chips, metric: st.metric,
+          bg: 'position:absolute;inset:0;display:flex;flex-direction:column;' + st.bg,
+          isLemon: st.kind === 'lemon', isLove: st.kind === 'love', isTiles: st.kind === 'tiles',
+          rowStyle: on ? 'background:#F8F1E7;color:#5B0F18;border-color:#F8F1E7' : '',
+          pick: function () { self.setState({ story: i }); } };
+      }),
+      storyBars: STORIES.map(function (st, i) {
+        return i < s.story ? { cls: 'done', style: 'height:100%;width:100%;background:#3E000D' }
+          : i === s.story ? { cls: 'bar-fill' + (s.storyPaused ? ' paused' : ''), style: '' }
+          : { cls: 'todo', style: 'height:100%;width:0' };
+      }),
+      storyPlaying: !s.storyPaused, storyPaused: s.storyPaused,
+      storyPauseLabel: s.storyPaused ? 'Play stories' : 'Pause stories',
+      toggleStory: function () { self.setState({ storyPaused: !s.storyPaused }); },
+      nextStory: function () { self.setState({ story: (s.story + 1) % STORIES.length }); },
+      prevStory: function () { self.setState({ story: (s.story + STORIES.length - 1) % STORIES.length }); },
+      like: function () { self.setState({ liked: !s.liked }); },
+      likeCount: s.liked ? '1' : '0',
+      likeStyle: 'background:none;border:none;color:' + (s.liked ? '#5B0F18' : '#3E000D') + (s.liked ? ';transform:scale(1.15)' : ''),
+      ombreStyle: this.scrollVals().ombreStyle, barStyle: this.scrollVals().barStyle,
+      hasToast: !!s.toast, toast: s.toast
+    });
+  }
+}
+</script>
+</body>
+</html>
