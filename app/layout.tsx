@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import ScrollOmbre from "@/components/layout/ScrollOmbre";
+import SiteNav from "@/components/layout/SiteNav";
 import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
 
@@ -15,7 +17,11 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${fontVariables} antialiased`}>
-      <body>{children}</body>
+      <body>
+        <ScrollOmbre />
+        <SiteNav />
+        {children}
+      </body>
     </html>
   );
 }
