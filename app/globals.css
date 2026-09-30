@@ -1,26 +1,647 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ------------------------------------------------------------------
+   Design tokens. Only three colors (CLAUDE.md §3); use their alpha
+   versions (e.g. bg-cream/30) and black-alpha shadows for anything else.
+   ------------------------------------------------------------------ */
+@theme {
+  --color-*: initial;
+  --color-wine: #5b0f18;
+  --color-deep: #3e000d;
+  --color-cream: #f8f1e7;
+  --color-black: #000;
+  --color-transparent: transparent;
+  --color-current: currentColor;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-montserrat), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-retro: var(--font-bagel), cursive;
+  --font-headline: var(--font-gloock), Georgia, serif;
+  --font-script: var(--font-pinyon), cursive;
+  --font-choed: var(--font-abril), Georgia, serif;
+  --font-vogue: var(--font-bodoni), Didot, "Bodoni 72", serif;
+  --font-seasons: var(--font-playfair), Georgia, serif;
+  --font-hand: var(--font-caveat), cursive;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --accent: var(--color-wine);
+  --soft: rgba(91, 15, 24, 0.07);
+}
+
+/* ------------------------------------------------------------------ base */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--color-deep);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-cream);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------ typography
+   Keep text flat: no stacked / double-layer effects (CLAUDE.md §4). */
+.headline {
+  font-family: var(--font-headline);
+  font-weight: 400;
+  font-size: clamp(44px, 6vw, 78px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.headline em {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.18em;
+  letter-spacing: 0;
+  color: var(--color-cream);
+  padding: 0 0.06em;
+}
+.script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
+  font-size: 1.06em;
+}
+.retro {
+  font-family: var(--font-retro);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.005em;
+  color: var(--color-cream);
+}
+.retro-ink {
+  font-family: var(--font-retro);
+  font-weight: 400;
+  color: var(--color-wine);
+}
+.choed {
+  font-family: var(--font-choed);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.vogue {
+  font-family: var(--font-vogue);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.vg {
+  font-family: var(--font-vogue);
+  font-style: italic;
+  font-weight: 500;
+}
+.seasons {
+  font-family: var(--font-seasons);
+}
+.mono {
+  font-family: var(--font-mono);
+}
+.kicker {
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------- buttons */
+.brew {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  transition:
+    color 0.3s,
+    transform 0.15s;
+}
+.brew::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  background: var(--color-cream);
+  transition: height 0.35s ease;
+  z-index: -1;
+}
+.brew:hover::before {
+  height: 100%;
+}
+.brew:active {
+  transform: scale(0.97);
+}
+
+.ghost-btn {
+  background: transparent;
+  border: 1.5px solid rgba(248, 241, 231, 0.7);
+  color: var(--color-cream);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  min-height: 44px;
+  box-sizing: border-box;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+}
+.ghost-btn:hover {
+  background: rgba(248, 241, 231, 0.12);
+}
+.ghost-btn:active {
+  transform: scale(0.97);
+}
+
+/* ------------------------------------------------------------------- nav */
+.nav-link {
+  position: relative;
+  color: var(--color-cream);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 10px 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+  min-height: 44px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition:
+    background 0.25s,
+    color 0.25s,
+    transform 0.2s;
+}
+.nav-link:hover {
+  background: rgba(248, 241, 231, 0.12);
+  transform: translateY(-1px);
+}
+.nav-link.is-active {
+  background: var(--color-cream);
+  color: var(--color-deep);
+}
+.nav-link .nav-idx {
+  font-size: 10px;
+  opacity: 0.55;
+  font-weight: 700;
+}
+.nav-mono {
+  font-family: var(--font-choed);
+  font-size: 17px;
+  color: var(--color-cream);
+  text-decoration: none;
+  padding: 6px 14px 6px 12px;
+  border-right: 1px solid rgba(248, 241, 231, 0.2);
+  margin-right: 4px;
+  letter-spacing: 0.04em;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------- up next */
+.next-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px 44px;
+  border-radius: 28px;
+  border: 1.5px solid rgba(248, 241, 231, 0.28);
+  color: var(--color-cream);
+  text-decoration: none;
+  background: linear-gradient(100deg, rgba(248, 241, 231, 0.08), rgba(248, 241, 231, 0));
+  transition:
+    background 0.35s,
+    transform 0.35s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+.next-card:hover {
+  background: linear-gradient(100deg, rgba(248, 241, 231, 0.16), rgba(248, 241, 231, 0.02));
+  transform: translateY(-4px);
+}
+.next-arrow {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--color-cream);
+  color: var(--color-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  transition: transform 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.next-card:hover .next-arrow {
+  transform: translateX(10px) rotate(-45deg);
+}
+@media (max-width: 640px) {
+  .next-card {
+    padding: 28px 24px;
+  }
+  .next-arrow {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ------------------------------------------------------------ animations
+   Timings copied from the prototype so the feel matches. */
+.fade-up {
+  animation: fadeUp 0.45s ease both;
+}
+.live-dot {
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+.hero-img {
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.45));
+}
+.win {
+  animation: twinkle 5s ease-in-out infinite;
+}
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.ticker:hover .marquee {
+  animation-play-state: paused;
+}
+.train {
+  animation: ride 16s linear infinite;
+}
+.tip-pop {
+  animation: tipPop 0.7s cubic-bezier(0.3, 1.8, 0.5, 1) both;
+}
+
+@keyframes printIn {
+  from {
+    clip-path: inset(-80px -80px 100% -80px);
+    transform: translateY(-60px);
+  }
+  to {
+    clip-path: inset(-80px -80px -80px -80px);
+    transform: none;
+  }
+}
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes scan {
+  from {
+    top: 6%;
+  }
+  to {
+    top: 90%;
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+@keyframes eq {
+  0%,
+  100% {
+    height: 4px;
+  }
+  50% {
+    height: 14px;
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes steam {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scaleY(0.8);
+  }
+  35% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-28px) scaleY(1.1);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-14px) rotate(8deg);
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  45% {
+    opacity: 0.35;
+  }
+  60% {
+    opacity: 1;
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes ride {
+  from {
+    transform: translateX(-620px);
+  }
+  to {
+    transform: translateX(1500px);
+  }
+}
+@keyframes run {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+@keyframes drop {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(180px) rotate(260deg);
+  }
+}
+@keyframes punch {
+  0% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bounce {
+  0% {
+    margin-top: -14px;
+  }
+  100% {
+    margin-top: 0;
+  }
+}
+@keyframes tapPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+@keyframes whisk {
+  from {
+    transform: rotate(-22deg);
+  }
+  to {
+    transform: rotate(22deg);
+  }
+}
+@keyframes chop {
+  from {
+    transform: translateY(-4px) rotate(-6deg);
+  }
+  to {
+    transform: translateY(3px) rotate(0);
+  }
+}
+@keyframes slideX {
+  from {
+    transform: translateX(-4px);
+  }
+  to {
+    transform: translateX(4px);
+  }
+}
+@keyframes hop {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+@keyframes ring {
+  from {
+    transform: rotate(-8deg);
+  }
+  to {
+    transform: rotate(8deg);
+  }
+}
+@keyframes flip {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-14deg) translateY(-3px);
+  }
+}
+@keyframes pulseS {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.18);
+  }
+}
+@keyframes kan {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(11px);
+  }
+}
+@keyframes type {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes barfill {
+  to {
+    width: 100%;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.12);
+  }
+  30% {
+    transform: scale(0.98);
+  }
+  45% {
+    transform: scale(1.08);
+  }
+}
+@keyframes tilepop {
+  from {
+    transform: scale(0) rotate(-20deg);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(248, 241, 231, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(248, 241, 231, 0);
+  }
+}
+@keyframes fileOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes tipPop {
+  0% {
+    transform: scale(0.4) rotate(-12deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(-4deg);
+    opacity: 1;
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes stride {
+  from {
+    transform: translateX(-6px) rotate(-3deg);
+  }
+  to {
+    transform: translateX(6px) rotate(3deg);
+  }
+}
+@keyframes stampIn {
+  from {
+    transform: scale(2) rotate(-12deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(-6deg);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

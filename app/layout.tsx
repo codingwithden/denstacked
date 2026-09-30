@@ -1,29 +1,21 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Denisse Medina Flores",
-  description: "Portfolio of Denisse Medina Flores.",
+  title: "Denisse Medina Flores — Order Up",
+  description:
+    "Founder and full-stack builder going into product management. APM / PM and product marketing, NYC, 2027.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#3E000D",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${fontVariables} antialiased`}>
+      <body>{children}</body>
     </html>
   );
 }
