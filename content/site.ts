@@ -3,7 +3,7 @@ import type { Link, NavItem, PageId, UpNextCopy } from "./types";
 export const EMAIL = "denissemedinaflores@gmail.com";
 export const COFFEE_CHAT_HREF = `mailto:${EMAIL}?subject=Coffee%20chat`;
 
-// [LINK] placeholders: swap "#" for real URLs once Den confirms them (CLAUDE.md §7).
+// [LINK] placeholders: swap "#" for real URLs once Den confirms them.
 export const SOCIAL: Link[] = [
   { label: "LINKEDIN", href: "https://www.linkedin.com/in/denisse-medina-flores" },
   { label: "GITHUB", href: "#" },

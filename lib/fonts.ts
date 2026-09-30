@@ -10,7 +10,7 @@ import {
   Playfair_Display,
 } from "next/font/google";
 
-// Free stand-ins for the intended paid fonts (see CLAUDE.md §4).
+// Free stand-ins for the intended paid fonts.
 // To swap in a licensed font later, replace one of these with next/font/local
 // and keep the same `variable` name.
 

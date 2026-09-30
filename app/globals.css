@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Design tokens. Only three colors (CLAUDE.md §3); use their alpha
+   Design tokens. Only three colors; use their alpha
    versions (e.g. bg-cream/30) and black-alpha shadows for anything else.
    ------------------------------------------------------------------ */
 @theme {
@@ -58,7 +58,7 @@ textarea:focus-visible {
 }
 
 /* ------------------------------------------------------------ typography
-   Keep text flat: no stacked / double-layer effects (CLAUDE.md §4). */
+   Keep text flat: no stacked / double-layer effects. */
 .headline {
   font-family: var(--font-headline);
   font-weight: 400;
