@@ -14,9 +14,10 @@ export const NAV: NavItem[] = [
   { id: "about", idx: "02", label: "About", href: "/about" },
   { id: "kitchen", idx: "03", label: "Kitchen", href: "/kitchen" },
   { id: "content", idx: "04", label: "Content", href: "/content" },
+  { id: "running", idx: "05", label: "Running", href: "/running" },
 ];
 
-// Work → About → Kitchen → Content → Work
+// Work → About → Kitchen → Content → Running → Work
 export const UP_NEXT: Record<PageId, UpNextCopy> = {
   work: {
     href: "/about",
@@ -34,6 +35,11 @@ export const UP_NEXT: Record<PageId, UpNextCopy> = {
     blurb: "Lemon8, UGC for startups and the DensDigitalDiary menu.",
   },
   content: {
+    href: "/running",
+    title: "Race day",
+    blurb: "Pacing plans, the NYC course profile and certified courses.",
+  },
+  running: {
     href: "/",
     title: "The work",
     blurb: "Back to the ticket: product, code and case studies.",
@@ -57,6 +63,7 @@ export const FOOTER = {
   },
   kitchen: { script: "yes, chef." },
   content: { script: "see you on the feed." },
+  running: { script: "see you at the start line." },
 };
 
 // Subway cars on the Work footer's elevated track.

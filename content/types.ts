@@ -1,7 +1,7 @@
 // Shared types for the typed content files. Copy in /content is ported verbatim
 // from reference/prototype. Anything in [BRACKETS] is a placeholder Den still fills.
 
-export type PageId = "work" | "about" | "kitchen" | "content";
+export type PageId = "work" | "about" | "kitchen" | "content" | "running";
 
 export interface NavItem {
   id: PageId;

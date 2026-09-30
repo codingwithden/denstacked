@@ -157,5 +157,7 @@ export default function Footer({ page }: { page: PageId }) {
       return <SimpleFooter script={FOOTER.kitchen.script} />;
     case "content":
       return <SimpleFooter script={FOOTER.content.script} />;
+    case "running":
+      return <SimpleFooter script={FOOTER.running.script} />;
   }
 }

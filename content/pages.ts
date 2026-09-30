@@ -73,6 +73,18 @@ export const HEROES: Record<PageId, Hero> = {
       { label: "CREATOR HISTORY", href: "#history" },
     ],
   },
+  running: {
+    kicker: "05 · RUNNING · RACE-DAY TOOLS",
+    title: "Race",
+    script: "day.",
+    intro:
+      "Tools for the long run: a mile-by-mile pace plan, the TCS NYC Marathon course profile and a certified course checker. Built while I train for my first marathon, November 7, 2027.",
+    links: [
+      { label: "PACE PLAN", href: "#pacing", primary: true },
+      { label: "THE COURSE", href: "#course" },
+      { label: "CERTIFIED COURSES", href: "#certified" },
+    ],
+  },
 };
 
 export const SECTIONS: Record<PageId, SectionCopy[]> = {
@@ -198,6 +210,20 @@ export const SECTIONS: Record<PageId, SectionCopy[]> = {
       kicker: "04 · THE PASTRY CASE",
       heading: { before: "Growth & ", em: "creative" },
       todo: "Phase 4: growth & creative skill cards.",
+    },
+  ],
+  running: [
+    {
+      id: "course",
+      kicker: "02 · THE COURSE",
+      heading: { before: "Know every ", em: "hill" },
+      todo: "Coming next: TCS NYC Marathon elevation profile with the 2026 Bronx reroute (miles 20–21). Waiting on elevation data.",
+    },
+    {
+      id: "certified",
+      kicker: "03 · CERTIFIED COURSES",
+      heading: { before: "Does my race ", em: "count?" },
+      todo: "Coming next: searchable list of World Athletics certified road courses. Waiting on the course data.",
     },
   ],
 };
