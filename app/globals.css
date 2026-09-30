@@ -224,6 +224,18 @@ textarea:focus-visible {
   box-sizing: border-box;
 }
 
+@media (max-width: 480px) {
+  .nav-link {
+    padding: 10px 11px;
+  }
+  .nav-link .nav-idx {
+    display: none;
+  }
+  .nav-mono {
+    padding: 6px 10px 6px 8px;
+  }
+}
+
 /* --------------------------------------------------------------- up next */
 .next-card {
   display: flex;
