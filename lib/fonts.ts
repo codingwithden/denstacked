@@ -87,16 +87,6 @@ export const caveat = Caveat({
   display: "swap",
 });
 
-export const fontVariables = [
-  bagel,
-  gloock,
-  pinyon,
-  abril,
-  bodoni,
-  playfair,
-  montserrat,
-  plexMono,
-  caveat,
-]
+export const fontVariables = [bagel, gloock, pinyon, abril, bodoni, playfair, montserrat, plexMono, caveat]
   .map((f) => f.variable)
   .join(" ");

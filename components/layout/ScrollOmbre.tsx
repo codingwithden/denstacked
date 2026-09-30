@@ -45,6 +45,7 @@ export default function ScrollOmbre() {
   const base = mix(WINE, DEEP, p * 0.75);
   const light = mix(WINE, CREAM, 0.22 * (1 - p));
   const mid = Math.round(45 - p * 30);
+  const glow = (0.1 * (1 - p)).toFixed(3);
 
   return (
     <>
@@ -52,10 +53,7 @@ export default function ScrollOmbre() {
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 -z-10"
         style={{
-          background: `radial-gradient(ellipse at ${Math.round(p * 100)}% 0%, rgba(248,241,231,${(
-            0.1 *
-            (1 - p)
-          ).toFixed(3)}), transparent 60%), linear-gradient(100deg, ${light} 0%, ${base} ${mid}%, ${DEEP} 100%)`,
+          background: `radial-gradient(ellipse at ${Math.round(p * 100)}% 0%, rgba(248,241,231,${glow}), transparent 60%), linear-gradient(100deg, ${light} 0%, ${base} ${mid}%, ${DEEP} 100%)`,
         }}
       />
       <div
