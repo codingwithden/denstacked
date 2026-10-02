@@ -85,6 +85,14 @@ export const HEROES: Record<PageId, Hero> = {
       { label: "CERTIFIED COURSES", href: "#certified" },
     ],
   },
+  resources: {
+    kicker: "06 · FREE RESOURCES · ON THE HOUSE",
+    title: "Free",
+    script: "Resources",
+    intro:
+      "Everything I used to build a startup, a website and a small business on a budget. The list is free. The starter kit is yours for an email.",
+    links: [],
+  },
 };
 
 export const SECTIONS: Record<PageId, SectionCopy[]> = {
@@ -226,4 +234,5 @@ export const SECTIONS: Record<PageId, SectionCopy[]> = {
       todo: "Coming next: searchable list of World Athletics certified road courses. Waiting on the course data.",
     },
   ],
+  resources: [],
 };

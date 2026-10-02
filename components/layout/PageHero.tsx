@@ -13,23 +13,25 @@ export default function PageHero({ hero, art }: { hero: Hero; art?: ReactNode })
           <span className="script">{hero.script}</span>
         </h1>
         <p className="m-0 max-w-[520px] text-base leading-[1.7] text-cream/90">{hero.intro}</p>
-        <div className="flex flex-wrap gap-2.5">
-          {hero.links.map((l) =>
-            l.primary ? (
-              <a
-                key={l.href}
-                href={l.href}
-                className="brew inline-flex min-h-12 items-center rounded-full bg-cream px-6 py-3.5 text-[13px] font-bold tracking-[.08em] text-deep no-underline"
-              >
-                {l.label}
-              </a>
-            ) : (
-              <a key={l.href} href={l.href} className="ghost-btn">
-                {l.label}
-              </a>
-            ),
-          )}
-        </div>
+        {hero.links.length > 0 && (
+          <div className="flex flex-wrap gap-2.5">
+            {hero.links.map((l) =>
+              l.primary ? (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className="brew inline-flex min-h-12 items-center rounded-full bg-cream px-6 py-3.5 text-[13px] font-bold tracking-[.08em] text-deep no-underline"
+                >
+                  {l.label}
+                </a>
+              ) : (
+                <a key={l.href} href={l.href} className="ghost-btn">
+                  {l.label}
+                </a>
+              ),
+            )}
+          </div>
+        )}
       </div>
       {art && (
         <div className="relative flex h-[360px] min-w-0 flex-[1_1_380px] items-center justify-center sm:h-[440px]">

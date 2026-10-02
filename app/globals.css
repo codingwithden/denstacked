@@ -316,6 +316,18 @@
   .train {
     animation: ride 16s linear infinite;
   }
+  .lift {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+  }
+  .punch-pop {
+    animation: punch 0.45s cubic-bezier(0.3, 1.8, 0.5, 1);
+  }
   .tip-pop {
     animation: tipPop 0.7s cubic-bezier(0.3, 1.8, 0.5, 1) both;
   }
