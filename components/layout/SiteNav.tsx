@@ -24,7 +24,7 @@ export default function SiteNav() {
       aria-label="Pages"
       className="fixed top-3.5 left-1/2 z-40 flex max-w-[calc(100%-24px)] -translate-x-1/2 items-center gap-0.5 overflow-x-auto rounded-full border border-cream/20 bg-deep/70 p-1.5 shadow-[0_12px_30px_rgba(0,0,0,.3)] backdrop-blur-[14px]"
     >
-      <Link className="nav-mono" href="/" aria-label="Denisse Medina Flores home">
+      <Link className="nav-mono" href="/work" aria-label="Denisse Medina Flores home">
         DMF
       </Link>
       {NAV.map((item) => {

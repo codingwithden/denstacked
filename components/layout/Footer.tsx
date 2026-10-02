@@ -123,7 +123,7 @@ function AboutFooter() {
         {f.title} <em>{f.em}</em>
       </h2>
       <div className="flex flex-wrap justify-center gap-3">
-        <Link className={primaryBtn} href="/">
+        <Link className={primaryBtn} href="/work">
           SEE MY WORK
         </Link>
         <a className="ghost-btn min-h-12 px-5 py-3" href={COFFEE_CHAT_HREF}>

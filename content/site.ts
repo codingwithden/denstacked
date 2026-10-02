@@ -10,14 +10,14 @@ export const SOCIAL: Link[] = [
 ];
 
 export const NAV: NavItem[] = [
-  { id: "work", idx: "01", label: "Work", href: "/" },
+  { id: "work", idx: "01", label: "Work", href: "/work" },
   { id: "about", idx: "02", label: "About", href: "/about" },
   { id: "kitchen", idx: "03", label: "Kitchen", href: "/kitchen" },
   { id: "content", idx: "04", label: "Content", href: "/content" },
-  { id: "running", idx: "05", label: "Running", href: "/running" },
+  { id: "running", idx: "05", label: "Runners", href: "/running" },
 ];
 
-// Work → About → Kitchen → Content → Running → Work
+// Work → About → Kitchen → Content → Runners → Work
 export const UP_NEXT: Record<PageId, UpNextCopy> = {
   work: {
     href: "/about",
@@ -36,11 +36,11 @@ export const UP_NEXT: Record<PageId, UpNextCopy> = {
   },
   content: {
     href: "/running",
-    title: "Race day",
-    blurb: "Pacing plans, the NYC course profile and certified courses.",
+    title: "Runner's Hub",
+    blurb: "The tools I am building for runners.",
   },
   running: {
-    href: "/",
+    href: "/work",
     title: "The work",
     blurb: "Back to the ticket: product, code and case studies.",
   },
