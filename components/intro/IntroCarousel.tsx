@@ -11,6 +11,7 @@ import {
   type WheelEvent,
 } from "react";
 import { DOORS, INTRO } from "@/content/intro";
+import MusicButton from "@/components/music/MusicButton";
 import Cup3D from "./Cup3D";
 
 const N = DOORS.length;
@@ -145,7 +146,8 @@ export default function IntroCarousel() {
     <div className="intro-bg relative flex min-h-screen w-full flex-col items-center overflow-hidden px-4 pt-3.5 pb-[18px]">
       <div className="flex w-full max-w-[1240px] items-center justify-between gap-3">
         <span className="choed text-[15px] tracking-[.06em]">DMF</span>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap justify-end gap-2">
+          <MusicButton className="intro-ghost" />
           <button type="button" className="intro-ghost" onClick={replay}>
             {INTRO.replay}
           </button>

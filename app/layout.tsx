@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import MusicProvider from "@/components/music/MusicProvider";
 import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
 
@@ -15,7 +16,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${fontVariables} antialiased`}>
-      <body>{children}</body>
+      <body>
+        <MusicProvider>{children}</MusicProvider>
+      </body>
     </html>
   );
 }
