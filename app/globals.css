@@ -698,7 +698,8 @@
     animation: bob 1.4s ease-in-out infinite;
   }
   .intro-track {
-    perspective: 1000px;
+    perspective: 1400px;
+    perspective-origin: 50% 40%;
     -webkit-mask: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
     mask: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
   }
@@ -728,26 +729,107 @@
   .intro-slot:focus-visible {
     outline: none;
   }
-  .intro-slot img {
+  /* 3D cup (components/intro/Cup3D.tsx) */
+  .cup3d-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cup3d-float {
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+  .intro-slot.is-center .cup3d-float {
+    animation: cupFloat 6s ease-in-out infinite;
+  }
+  .cup3d {
+    position: relative;
+    display: block;
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition:
+      transform 0.45s cubic-bezier(0.2, 0.9, 0.2, 1),
+      filter 0.35s ease;
+    filter: drop-shadow(0 26px 22px rgba(0, 0, 0, 0.4)) drop-shadow(0 6px 6px rgba(0, 0, 0, 0.25));
+  }
+  /* Only the center cup follows the pointer. */
+  .intro-slot:not(.is-center) .cup3d {
+    transform: none;
+  }
+  .cup3d img {
     display: block;
     object-fit: contain;
     pointer-events: none;
-    filter: drop-shadow(0 22px 26px rgba(0, 0, 0, 0.45));
-    transition:
-      transform 0.45s cubic-bezier(0.3, 1.6, 0.5, 1),
-      filter 0.35s ease;
   }
-  .intro-cup {
+  /* Glossy highlight, clipped to the cup's own shape by a mask of the same PNG. */
+  .cup3d-sheen {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background:
+      radial-gradient(circle at var(--mx, 32%) var(--my, 24%), rgba(248, 241, 231, 0.55), transparent 38%),
+      linear-gradient(
+        112deg,
+        transparent 30%,
+        rgba(248, 241, 231, 0.22) 42%,
+        transparent 50%,
+        transparent 70%,
+        rgba(0, 0, 0, 0.18) 100%
+      );
+    mix-blend-mode: soft-light;
+    opacity: 0.9;
+    transition: opacity 0.35s ease;
+  }
+  .intro-slot:not(.is-center) .cup3d-sheen {
+    opacity: 0.5;
+  }
+  .cup3d-shadow {
+    position: absolute;
+    left: 50%;
+    width: 62%;
+    height: 22px;
+    margin-left: -31%;
+    bottom: calc(var(--reflect) - 10px);
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55), transparent 70%);
+    filter: blur(4px);
+    pointer-events: none;
+  }
+  .intro-slot.is-center .cup3d-shadow {
+    animation: shadowFloat 6s ease-in-out infinite;
+  }
+  .cup3d-reflect {
     display: block;
+    height: var(--reflect);
+    overflow: hidden;
+    margin-top: 2px;
+    opacity: 0.28;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent 85%);
+    mask-image: linear-gradient(to bottom, #000, transparent 85%);
   }
-  .intro-slot.is-center .intro-cup {
-    animation: float 6s ease-in-out infinite;
+  .cup3d-reflect img {
+    display: block;
+    transform: scaleY(-1);
+    filter: blur(1.5px);
   }
-  .intro-slot:hover img,
-  .intro-slot:focus-visible img {
-    transform: translateY(-22px) scale(1.1);
-    filter: drop-shadow(0 0 22px rgba(248, 241, 231, 0.85)) drop-shadow(0 0 60px rgba(248, 241, 231, 0.45))
-      drop-shadow(0 30px 30px rgba(0, 0, 0, 0.45));
+  .intro-slot:hover .cup3d,
+  .intro-slot:focus-visible .cup3d {
+    filter: drop-shadow(0 0 22px rgba(248, 241, 231, 0.7)) drop-shadow(0 0 60px rgba(248, 241, 231, 0.35))
+      drop-shadow(0 30px 26px rgba(0, 0, 0, 0.45));
+  }
+  .intro-slot:hover .cup3d-float,
+  .intro-slot:focus-visible .cup3d-float {
+    translate: 0 -14px;
+    transition: translate 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+  }
+  .cup3d-float {
+    transition: translate 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
   }
   .intro-arrow {
     position: absolute;
@@ -843,6 +925,26 @@
   }
   .intro-ghost:hover {
     background: rgba(248, 241, 231, 0.12);
+  }
+  @keyframes cupFloat {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0);
+    }
+    50% {
+      transform: translateY(-12px) rotate(1.5deg);
+    }
+  }
+  @keyframes shadowFloat {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(0.82);
+      opacity: 0.7;
+    }
   }
   @keyframes dropIn {
     from {

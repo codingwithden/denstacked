@@ -1,9 +1,17 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState, type MouseEvent, type WheelEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent,
+  type PointerEvent,
+  type WheelEvent,
+} from "react";
 import { DOORS, INTRO } from "@/content/intro";
+import Cup3D from "./Cup3D";
 
 const N = DOORS.length;
 const pad = (i: number) => `0${i}`;
@@ -19,9 +27,12 @@ const SIZES: Record<string, [number, number]> = {
   "/images/drink-iced-latte.png": [273, 436],
 };
 
-/** Cup height and carousel step for the viewport (same math as the prototype). */
+/** Room under each cup for its floor reflection, as a share of cup height. */
+const REFLECT = 0.18;
+
+/** Cup height and carousel step for the viewport (prototype math, leaving room for the reflection). */
 function measure(w: number, h: number) {
-  const fit = Math.max(260, h - (w < 700 ? 360 : 330));
+  const fit = Math.max(240, (h - (w < 700 ? 380 : 400)) / (1 + REFLECT));
   const cup = w < 700 ? Math.round(Math.min(320, w * 0.8, fit)) : Math.round(Math.min(520, fit));
   return { cup, step: Math.round(cup * (w < 700 ? 0.36 : 0.4)) };
 }
@@ -35,6 +46,7 @@ export default function IntroCarousel() {
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const toastTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const lastWheel = useRef(0);
+  const stage = useRef<HTMLDivElement>(null);
 
   const go = useCallback((i: number) => setActive(((i % N) + N) % N), []);
 
@@ -106,6 +118,25 @@ export default function IntroCarousel() {
     go(active + (d > 0 ? 1 : -1));
   };
 
+  // Tilt the center cup toward the pointer. Writes CSS vars straight to the stage (no re-render).
+  const onPointerMove = (e: PointerEvent) => {
+    const el = stage.current;
+    if (!el || e.pointerType !== "mouse") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    el.style.setProperty("--ry", `${(x * 26).toFixed(2)}deg`);
+    el.style.setProperty("--rx", `${(-y * 14).toFixed(2)}deg`);
+    el.style.setProperty("--mx", `${(50 + x * 70).toFixed(1)}%`);
+    el.style.setProperty("--my", `${(30 + y * 50).toFixed(1)}%`);
+  };
+  const onPointerLeave = () => {
+    const el = stage.current;
+    if (!el) return;
+    ["--rx", "--ry", "--mx", "--my"].forEach((v) => el.style.removeProperty(v));
+  };
+
   const { cup: H, step: W } = size;
   const door = DOORS[active];
   const dur = spinning ? ".16s linear" : ".65s cubic-bezier(.2,.9,.2,1)";
@@ -162,16 +193,19 @@ export default function IntroCarousel() {
           <Chevron d="m15 6-6 6 6 6" />
         </button>
         <div
+          ref={stage}
           className="intro-track relative w-full overflow-hidden"
-          style={{ height: H + 30 }}
+          style={{ height: Math.round(H * (1 + REFLECT)) + 30 }}
           onWheel={onWheel}
+          onPointerMove={onPointerMove}
+          onPointerLeave={onPointerLeave}
         >
           <span aria-hidden="true" className="intro-glow" />
           {DOORS.map((d, i) => {
             let off = (((i - active) % N) + N) % N;
             if (off > N / 2) off -= N;
             const a = Math.abs(off);
-            const scale = off === 0 ? 1 : Math.max(0.56, 0.8 - (a - 1) * 0.12);
+            const scale = off === 0 ? 1 : Math.max(0.62, 0.9 - (a - 1) * 0.12);
             let op = off === 0 ? 1 : a === 1 ? 0.5 : a === 2 ? 0.22 : a === 3 ? 0.08 : 0;
             const faded = !spinning && hover !== -1 && hover !== i;
             if (faded) op *= 0.4;
@@ -190,7 +224,8 @@ export default function IntroCarousel() {
                 onFocus={() => !spinning && setHover(i)}
                 onBlur={() => setHover(-1)}
                 style={{
-                  transform: `translate(-50%,-50%) translateX(${off * W}px) rotateY(${off * -12}deg) scale(${scale})`,
+                  // Cups sit on a curved arc: the further out, the deeper and more turned away.
+                  transform: `translate(-50%,-50%) translateX(${off * W}px) translateZ(${-a * 140}px) rotateY(${off * -24}deg) scale(${scale})`,
                   opacity: op,
                   filter: `blur(${blur}px)${faded ? " saturate(.6)" : ""}`,
                   zIndex: hover === i ? 20 : 10 - a,
@@ -198,16 +233,7 @@ export default function IntroCarousel() {
                   pointerEvents: a > 2 ? "none" : "auto",
                 }}
               >
-                <span className="intro-cup">
-                  <Image
-                    src={d.img}
-                    alt=""
-                    width={iw}
-                    height={ih}
-                    priority={i === 0}
-                    style={{ height: H, width: "auto", maxWidth: Math.round(H * 0.8) }}
-                  />
-                </span>
+                <Cup3D src={d.img} width={iw} height={ih} cupHeight={H} priority={i === 0} />
               </button>
             );
           })}
