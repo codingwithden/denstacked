@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     "Founder and full-stack builder going into product management. APM / PM and product marketing, NYC, 2027.",
 };
 
-// The music button only appears once the track exists in public/audio.
-const hasMusic = fs.existsSync(path.join(process.cwd(), "public", "audio", MUSIC.file));
+// The music button only appears once there's a track: a hosted link or a file in public/audio.
+const hasMusic = !!MUSIC.url || fs.existsSync(path.join(process.cwd(), "public", "audio", MUSIC.file));
 
 export const viewport: Viewport = {
   themeColor: "#3E000D",

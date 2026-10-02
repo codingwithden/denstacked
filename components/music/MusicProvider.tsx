@@ -35,7 +35,7 @@ export default function MusicProvider({ available, children }: { available: bool
   const toggle = useCallback(() => {
     if (!available) return;
     if (!audio.current) {
-      const a = new Audio(`/audio/${MUSIC.file}`);
+      const a = new Audio(MUSIC.url || `/audio/${MUSIC.file}`);
       a.loop = true;
       a.volume = MUSIC.volume;
       a.onplay = () => setStatus("playing");
