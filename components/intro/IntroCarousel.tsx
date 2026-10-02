@@ -10,7 +10,9 @@ import {
   type PointerEvent,
   type WheelEvent,
 } from "react";
+import type { GreetingLang } from "@/content/greeting";
 import { DOORS, INTRO } from "@/content/intro";
+import GreetingPill from "@/components/greeting/GreetingPill";
 import MusicButton from "@/components/music/MusicButton";
 import Cup3D from "./Cup3D";
 
@@ -33,12 +35,12 @@ const REFLECT = 0.18;
 
 /** Cup height and carousel step for the viewport (prototype math, leaving room for the reflection). */
 function measure(w: number, h: number) {
-  const fit = Math.max(240, (h - (w < 700 ? 380 : 400)) / (1 + REFLECT));
+  const fit = Math.max(240, (h - (w < 700 ? 430 : 450)) / (1 + REFLECT));
   const cup = w < 700 ? Math.round(Math.min(320, w * 0.8, fit)) : Math.round(Math.min(520, fit));
   return { cup, step: Math.round(cup * (w < 700 ? 0.36 : 0.4)) };
 }
 
-export default function IntroCarousel() {
+export default function IntroCarousel({ greetings }: { greetings: GreetingLang[] }) {
   const [active, setActive] = useState(0);
   const [spinning, setSpinning] = useState(true);
   const [hover, setHover] = useState(-1);
@@ -181,6 +183,9 @@ export default function IntroCarousel() {
           <span className="choed rounded-full border border-cream/40 px-3 py-[5px] text-xs tracking-[.06em]">
             {INTRO.role}
           </span>
+        </div>
+        <div className="intro-drop mt-1" style={{ animationDelay: "1.2s" }}>
+          <GreetingPill available={greetings} />
         </div>
       </header>
 

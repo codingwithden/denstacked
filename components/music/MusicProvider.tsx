@@ -65,6 +65,9 @@ interface MusicContextValue {
   stop: () => void;
   /** Start fetching the YouTube API early (on hover/focus of a play button). */
   warm: () => void;
+  /** Pause if playing. Returns true if it was playing (so the caller can resume). */
+  pause: () => boolean;
+  resume: () => void;
 }
 
 const MusicContext = createContext<MusicContextValue | null>(null);
@@ -94,6 +97,21 @@ export default function MusicProvider({ children }: { children: ReactNode }) {
     player.current?.destroy();
     player.current = null;
     setStatus("off");
+  }, []);
+
+  const statusRef = useRef<MusicStatus>("off");
+  useEffect(() => {
+    statusRef.current = status;
+  }, [status]);
+
+  const pause = useCallback(() => {
+    if (statusRef.current !== "playing" || !player.current) return false;
+    player.current.pauseVideo();
+    return true;
+  }, []);
+
+  const resume = useCallback(() => {
+    player.current?.playVideo();
   }, []);
 
   const toggle = useCallback(() => {
@@ -137,7 +155,7 @@ export default function MusicProvider({ children }: { children: ReactNode }) {
   useEffect(() => () => player.current?.destroy(), []);
 
   return (
-    <MusicContext.Provider value={{ status, toggle, stop, warm }}>
+    <MusicContext.Provider value={{ status, toggle, stop, warm, pause, resume }}>
       {children}
       {status !== "off" && (
         <div
