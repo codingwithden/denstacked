@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
+import { NavMusicToggle } from "@/components/music/MusicButton";
 import { NAV } from "@/content/site";
 
 /** Fixed frosted pill nav: DMF · 01 Work · 02 About · 03 Kitchen · 04 Content. */
@@ -41,6 +42,7 @@ export default function SiteNav() {
           </Link>
         );
       })}
+      <NavMusicToggle />
     </nav>
   );
 }

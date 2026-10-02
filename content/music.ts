@@ -1,13 +1,13 @@
 // Background music for the site. Plays only after the visitor presses play.
-// Source: https://www.youtube.com/watch?v=Yu7zZvH60ag (link started at t=4804s, 1:20:04).
+// Drop a track you have the rights to at public/audio/music.mp3 and redeploy;
+// the music button appears by itself once the file exists.
 
 export const MUSIC = {
-  videoId: "Yu7zZvH60ag",
-  /** Seconds into the video to start (and loop back to). */
-  start: 4804,
+  file: "music.mp3",
+  /** 0–1, so it sits under the page instead of over it. */
+  volume: 0.5,
   play: "PLAY MUSIC",
-  pause: "PAUSE MUSIC",
-  loading: "LOADING…",
-  nowPlaying: "NOW PLAYING",
-  close: "Turn off music",
+  playing: "NOW PLAYING",
+  pause: "Pause music",
+  resume: "Play music",
 };
