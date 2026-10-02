@@ -1,6 +1,8 @@
-import { redirect } from "next/navigation";
+import type { Metadata } from "next";
+import IntroCarousel from "@/components/intro/IntroCarousel";
 
-// Temporary: the intro carousel replaces this in the next commit.
-export default function Home() {
-  redirect("/work");
+export const metadata: Metadata = { title: "Denisse's Portfolio — Pick a Drink" };
+
+export default function IntroPage() {
+  return <IntroCarousel />;
 }
