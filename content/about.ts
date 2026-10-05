@@ -416,7 +416,7 @@ export const TIMELINE: TimelineYear[] = [
         when: "2026",
         title: "Building in public",
         org: "Seven Solace Co. · Runner’s Hub · this site",
-        body: "A handmade charms shop getting ready to launch, tools for runners, and this portfolio, built with Claude Code and Cursor.",
+        body: "A handmade charms shop getting ready to launch, tools for runners, and this portfolio.",
         tags: ["SHIP", "AI-AUGMENTED"],
       },
     ],
