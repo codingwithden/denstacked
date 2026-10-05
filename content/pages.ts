@@ -43,6 +43,7 @@ export const HEROES: Record<PageId, Hero> = {
     intro:
       "The part that doesn't fit on a resume: the miles, the causes I show up for and the small daily rituals that keep a Bronx founder on pace.",
     links: [
+      { label: "MY TIMELINE", href: "#timeline" },
       { label: "THE MARATHON", href: "#run" },
       { label: "GIVING BACK", href: "#give" },
       { label: "DAILY RITUALS", href: "#habits" },
@@ -167,12 +168,6 @@ export const SECTIONS: Record<PageId, SectionCopy[]> = {
       kicker: "03 · DAILY RITUALS",
       heading: { before: "Opening & ", em: "closing", after: " shift" },
       todo: "Phase 4: opening / closing shift checklists, progress ring and stamp.",
-    },
-    {
-      id: "type",
-      kicker: "04 · FUN FACT",
-      heading: { before: "I type 108 WPM. ", em: "Your turn." },
-      todo: "Phase 4: typing test against Den's 108 WPM.",
     },
     {
       id: "shelf",

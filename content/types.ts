@@ -243,3 +243,45 @@ export interface PastryItem {
   name: string;
   note: string;
 }
+
+// ---------------------------------------------------------- About: timeline
+
+export interface TimelineItem {
+  when: string;
+  title: string;
+  org: string;
+  body: string;
+  tags: string[];
+}
+
+export interface TimelineYear {
+  year: string;
+  career: TimelineItem[];
+  life: TimelineItem[];
+}
+
+// ------------------------------------------------------ About: typing test
+
+export type TypingTopicId = "mix" | "coffee" | "product" | "running" | "kitchen" | "content";
+export type TypingLevelId = "easy" | "hard" | "extra" | "extreme";
+
+export interface TypingTopic {
+  id: TypingTopicId;
+  label: string;
+  /** "Surprise me" has no phrases of its own; it mixes every topic. */
+  phrases?: string[];
+  /** Phrases with numbers and symbols, mixed in at harder levels. */
+  spice?: string[];
+}
+
+export interface TypingLevel {
+  id: TypingLevelId;
+  label: string;
+  /** Goal WPM for the level. */
+  goal: number;
+  /** Roughly how many words the phrase should have. */
+  words: number;
+  /** How many "spice" phrases to mix in. */
+  spice: number;
+  note: string;
+}
