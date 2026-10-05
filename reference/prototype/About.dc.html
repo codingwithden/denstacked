@@ -54,6 +54,18 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #F8F1
 .stamp-in{animation:stampIn .5s cubic-bezier(.3,1.8,.5,1) both}
 @keyframes stampIn{from{transform:scale(2) rotate(-12deg);opacity:0}to{transform:rotate(-6deg);opacity:1}}
 .tab{border:1.5px solid #3E000D;background:transparent;color:#3E000D;border-radius:999px;padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:.08em;min-height:44px;transition:background .2s,color .2s}
+.shelf{display:flex;align-items:flex-end;gap:5px;height:390px;padding:40px 24px 0;overflow-x:auto;overflow-y:hidden;border-bottom:16px solid #3E000D;box-shadow:0 18px 24px -14px rgba(0,0,0,.6);scrollbar-width:thin}
+.spine{position:relative;flex:none;border:none;padding:0;border-radius:3px 3px 1px 1px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:space-between;overflow:hidden;transform-origin:bottom center;box-shadow:inset -6px 0 0 rgba(0,0,0,.14),inset 3px 0 0 rgba(248,241,231,.08);transition:transform .35s cubic-bezier(.3,1.5,.5,1),box-shadow .35s,width .55s cubic-bezier(.2,.9,.2,1),height .55s cubic-bezier(.2,.9,.2,1)}
+.spine:hover{transform:translateY(-24px) rotate(-1.5deg);box-shadow:0 20px 28px rgba(0,0,0,.4),inset -6px 0 0 rgba(0,0,0,.14)}
+.spine.open{transform:translateY(-8px);box-shadow:0 24px 40px rgba(0,0,0,.45)}
+.spine.open:hover{transform:translateY(-14px)}
+.spine-title{writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:700;letter-spacing:.02em;padding:16px 0 8px;white-space:nowrap;overflow:hidden;max-height:82%}
+.spine-mark{font-family:'Bodoni Moda',serif;font-style:italic;font-size:15px;padding-bottom:10px}
+.cover-in{animation:coverIn .7s cubic-bezier(.2,.9,.2,1) both;transform-origin:left center}
+@keyframes coverIn{from{transform:perspective(900px) rotateY(-88deg);opacity:.3}to{transform:none;opacity:1}}
+.shelf-arrow{width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,241,231,.45);background:transparent;color:#F8F1E7;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.shelf-arrow:hover{background:rgba(248,241,231,.12)}
+@media (max-width:700px){.shelf{height:330px}}
 .book{border:none;padding:0;width:54px;border-radius:4px 4px 2px 2px;display:flex;align-items:flex-end;justify-content:center;transition:transform .3s cubic-bezier(.3,1.6,.5,1);box-shadow:inset -4px 0 0 rgba(0,0,0,.15)}
 .book:hover{transform:translateY(-14px) rotate(-2deg)}
 .lang-btn{transition:transform .2s cubic-bezier(.3,1.6,.5,1),background .2s}
@@ -109,6 +121,52 @@ body{font-family:'Montserrat',system-ui,sans-serif!important}
 .next-arrow{width:84px;height:84px;border-radius:50%;background:#F8F1E7;color:#3E000D;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .45s cubic-bezier(.3,1.6,.5,1)}
 .next-card:hover .next-arrow{transform:translateX(10px) rotate(-45deg)}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+.badge-stage{position:relative;flex:1 1 400px;height:580px;min-width:0;touch-action:pan-y}
+.badge-rope{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:4}
+.badge{position:absolute;left:0;top:0;width:230px;height:330px;transform-origin:115px 0;z-index:5;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;transform:translate(85px,200px);filter:drop-shadow(26px 34px 22px rgba(0,0,0,.32));outline:none}
+.badge:active{cursor:grabbing}
+.badge:focus-visible .sleeve{box-shadow:0 0 0 3px #F8F1E7}
+.badge .hook{position:absolute;left:50%;top:-30px;margin-left:-9px;width:18px;height:34px}
+.sleeve{position:absolute;inset:0;border-radius:16px;background:rgba(248,241,231,.22);border:1px solid rgba(248,241,231,.6);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);box-sizing:border-box;padding:24px 10px 10px}
+.sleeve::before{content:'';position:absolute;left:50%;top:9px;width:46px;height:8px;margin-left:-23px;border-radius:6px;background:rgba(62,0,13,.35);box-shadow:inset 0 1px 2px rgba(0,0,0,.4)}
+.sleeve::after{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(125deg,rgba(248,241,231,.45) 0%,rgba(248,241,231,0) 32%,rgba(248,241,231,0) 70%,rgba(248,241,231,.18) 100%);pointer-events:none}
+.badge-card{height:100%;border-radius:8px;background:#F8F1E7;color:#3E000D;padding:16px 16px 12px;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;text-align:left}
+.badge-hint{position:absolute;left:8px;bottom:70px;font-family:'Caveat',cursive;font-size:24px;color:#F8F1E7;transform:rotate(-4deg);pointer-events:none;opacity:.9;z-index:2}
+.big-name{width:100%;max-width:1120px;padding:0 16px;box-sizing:border-box;margin-top:4px;position:relative;z-index:1;font-family:'Gloock',Georgia,serif;font-weight:400;color:#F8F1E7;font-size:clamp(44px,8.9vw,104px);line-height:.92;letter-spacing:-.025em;pointer-events:none}
+@media (max-width:700px){.badge-stage{flex-basis:100%;height:480px}.big-name{margin-top:24px}}
+.tl-filter{background:transparent;border:1.5px solid rgba(248,241,231,.45);color:#F8F1E7;border-radius:999px;padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:.1em;min-height:44px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s}
+.tl-filter:hover{background:rgba(248,241,231,.1)}
+.tl-filter[aria-pressed=true]{background:#F8F1E7;color:#3E000D;border-color:#F8F1E7}
+.tl-head{display:grid;grid-template-columns:1fr 96px 1fr;gap:0 20px;color:#F8F1E7;font-size:11px;letter-spacing:.22em;font-weight:700}
+.tl-row{display:grid;grid-template-columns:1fr 96px 1fr;grid-template-areas:"c y p";gap:0 20px}
+.tl-c{grid-area:c;display:flex;flex-direction:column;gap:12px;align-items:flex-end;padding:14px 0}
+.tl-p{grid-area:p;display:flex;flex-direction:column;gap:12px;align-items:flex-start;padding:14px 0}
+.tl-y{grid-area:y;position:relative;display:flex;justify-content:center}
+.tl-y::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;background:rgba(248,241,231,.3)}
+.tl-yr{position:sticky;top:76px;align-self:flex-start;margin-top:14px;z-index:1;background:#3E000D;color:#F8F1E7;border:1.5px solid rgba(248,241,231,.6);border-radius:999px;padding:7px 10px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;white-space:nowrap}
+.tl-card{width:100%;max-width:420px;box-sizing:border-box;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;text-align:left;transition:transform .25s cubic-bezier(.3,1.4,.5,1),box-shadow .25s}
+.tl-card:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(0,0,0,.3)}
+.tl-card.career{background:#F8F1E7;color:#3E000D}
+.tl-card.life{background:rgba(248,241,231,.06);color:#F8F1E7;border:1.5px dashed rgba(248,241,231,.5)}
+.tl-when{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;font-weight:600;opacity:.75}
+.tl-title{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:700;line-height:1.15}
+.tl-org{font-size:12px;font-weight:700;letter-spacing:.02em;opacity:.85}
+.tl-body{font-size:13.5px;line-height:1.55;opacity:.9}
+.tl-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.tl-tag{font-size:9.5px;font-weight:700;letter-spacing:.1em;border-radius:999px;padding:3px 8px;border:1px solid currentColor;opacity:.8}
+.tl-mtag{display:none;font-size:9.5px;font-weight:700;letter-spacing:.18em;opacity:.7}
+@media (max-width:700px){.tl-head{display:none}.tl-row{grid-template-columns:58px 1fr;grid-template-areas:"y c" "y p";gap:0 12px}.tl-c,.tl-p{align-items:stretch;padding:8px 0}.tl-c:empty,.tl-p:empty{display:none}.tl-yr{font-size:10px;padding:6px 7px;white-space:normal;text-align:center;max-width:58px;box-sizing:border-box;line-height:1.2}.tl-mtag{display:block}}
+.wpm-chip{background:transparent;border:1.5px solid rgba(248,241,231,.4);color:#F8F1E7;border-radius:999px;padding:8px 14px;font-family:'Montserrat',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.08em;min-height:40px;cursor:pointer;transition:background .2s,transform .15s}
+.wpm-chip:hover{background:rgba(248,241,231,.1)}
+.wpm-chip[aria-pressed=true]{background:#F8F1E7;color:#3E000D;border-color:#F8F1E7}
+.wpm-lvl{background:transparent;border:1.5px solid rgba(248,241,231,.35);color:#F8F1E7;border-radius:12px;padding:12px 14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:3px;min-width:0;transition:background .2s,transform .15s}
+.wpm-lvl:hover{background:rgba(248,241,231,.08);transform:translateY(-2px)}
+.wpm-lvl[aria-pressed=true]{background:#F8F1E7;color:#3E000D;border-color:#F8F1E7}
+.wpm-lvls{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.wpm-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.wpm-stat{border:1px solid rgba(248,241,231,.2);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;font-size:10.5px;letter-spacing:.14em}
+.wpm-stat strong{font-family:'Playfair Display',Georgia,serif;font-size:28px;letter-spacing:0;font-variant-numeric:tabular-nums}
+@media (max-width:700px){.wpm-lvls,.wpm-stats{grid-template-columns:repeat(2,1fr)}}
 </style>
 </helmet>
 
@@ -130,8 +188,36 @@ body{font-family:'Montserrat',system-ui,sans-serif!important}
     </div>
   </div>
 
-  <!-- hero -->
-  <section style="width: 100%; max-width: 1120px; padding: 56px 16px 0; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 32px">
+  <!-- hero: lanyard badge (left) + me (right) -->
+  <section style="width: 100%; max-width: 1120px; padding: 24px 16px 0; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 32px">
+    <div class="badge-stage" data-badge-stage="1">
+      <svg class="badge-rope" aria-hidden="true"><path data-strand="a" d="" fill="none" stroke="#F8F1E7" stroke-width="10" stroke-linecap="round"></path><path data-strand="b" d="" fill="none" stroke="#F8F1E7" stroke-width="10" stroke-linecap="round"></path><path data-strand="c" d="" fill="none" stroke="#5B0F18" stroke-width="1.5" stroke-dasharray="2 5" opacity=".7"></path></svg>
+      <div class="badge" data-badge="1" role="button" tabindex="0" aria-label="Den's staff badge. Drag it or press Enter to give it a swing." onPointerDown="{{grabBadge}}" onKeyDown="{{nudgeBadge}}">
+        <svg class="hook" viewBox="0 0 18 34" aria-hidden="true"><rect x="5" y="0" width="8" height="12" rx="3" fill="#F8F1E7" stroke="rgba(0,0,0,.35)"></rect><path d="M9 12 v6 a6 6 0 1 0 6 6" fill="none" stroke="#F8F1E7" stroke-width="3" stroke-linecap="round"></path><path d="M9 12 v6 a6 6 0 1 0 6 6" fill="none" stroke="rgba(0,0,0,.3)" stroke-width="1"></path></svg>
+        <div class="sleeve">
+          <div class="badge-card">
+            <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; letter-spacing: .14em; font-weight: 600; opacity: .75"><span>STAFF · ALL ACCESS</span><span>NO. 001</span></div>
+            <div style="margin-top: 10px; line-height: .86">
+              <div style="font-family: 'Gloock', Georgia, serif; font-size: 46px; letter-spacing: -.02em">Denisse</div>
+              <div style="font-family: 'Pinyon Script', cursive; font-size: 29px; color: #5B0F18; margin-top: 4px; padding-left: 6px; white-space: nowrap">Medina Flores</div>
+            </div>
+            <div style="flex: 1"></div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 8px; letter-spacing: .16em; opacity: .6">CURRENTLY</div>
+            <div style="font-size: 11.5px; font-weight: 700; line-height: 1.3">Founder, Work &amp; Brew<br><span style="font-weight: 500">Product &amp; Project Manager</span></div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 8px; letter-spacing: .16em; opacity: .6; margin-top: 4px">ALSO RUNNING</div>
+            <div style="display: flex; gap: 5px; flex-wrap: wrap">
+              <span style="background: #3E000D; color: #F8F1E7; border-radius: 999px; padding: 3px 8px; font-size: 8.5px; font-weight: 700; letter-spacing: .04em">Seven Solace Co.</span>
+              <span style="background: #5B0F18; color: #F8F1E7; border-radius: 999px; padding: 3px 8px; font-size: 8.5px; font-weight: 700; letter-spacing: .04em">DensDigitalDiary</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px; border-top: 1px dashed rgba(62,0,13,.3); padding-top: 8px">
+              <span aria-hidden="true" style="flex: 1; height: 16px; background: repeating-linear-gradient(90deg,#3E000D 0 2px,transparent 2px 4px,#3E000D 4px 5px,transparent 5px 8px,#3E000D 8px 11px,transparent 11px 12px)"></span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 8px; letter-spacing: .12em; font-weight: 600">BRONX · NYC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="badge-hint" aria-hidden="true">grab my badge ↗</span>
+    </div>
     <div class="fade-up" style="flex: 1 1 460px; display: flex; flex-direction: column; gap: 20px; color: #F8F1E7">
       <span style="font-size: 12px; letter-spacing: .24em; color: #F8F1E7; font-weight: 600">ABOUT ME · JUST FOR FUN</span>
       <h1 class="retro" style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(52px, 7vw, 88px); line-height: .95; letter-spacing: -.02em">Off the clock.<br><span class="script" style="color: #F8F1E7">Fuera de turno.</span></h1>
@@ -151,6 +237,7 @@ body{font-family:'Montserrat',system-ui,sans-serif!important}
         <span style="font-size: 11px; letter-spacing: .14em; color: rgba(248,241,231,.6)">TAP ↻</span>
       </button>
       <div style="display: flex; gap: 10px; flex-wrap: wrap">
+        <a class="ghost-btn" href="#timeline">MY TIMELINE</a>
         <a class="ghost-btn" href="#run">THE MARATHON</a>
         <a class="ghost-btn" href="#give">GIVING BACK</a>
         <a class="ghost-btn" href="#habits">DAILY RITUALS</a>
@@ -158,22 +245,32 @@ body{font-family:'Montserrat',system-ui,sans-serif!important}
         <a class="ghost-btn" href="#shelf">THE SHELF</a>
       </div>
     </div>
-    <div style="flex: 1 1 380px; display: flex; justify-content: center">
-      <svg viewBox="0 0 400 300" width="100%" style="max-width: 440px" aria-hidden="true">
-        <g class="rays"><g stroke="#F8F1E7" stroke-width="3" stroke-linecap="round" opacity=".5"><path d="M200 60v-30M200 280v30M90 170h-30M310 170h30M122 92l-21-21M278 92l21-21M122 248l-21 21M278 248l21 21"></path></g></g>
-        <circle class="sun" cx="200" cy="170" r="78" fill="#F8F1E7"></circle>
-        <g fill="rgba(0,0,0,.4)">
-          <rect x="40" y="190" width="40" height="80"></rect><rect x="86" y="160" width="34" height="110"></rect><rect x="124" y="200" width="46" height="70"></rect>
-          <rect x="176" y="140" width="30" height="130"></rect><path d="M186 140 l5 -26 l5 26z"></path><rect x="212" y="182" width="44" height="88"></rect>
-          <rect x="262" y="150" width="36" height="120"></rect><rect x="304" y="196" width="50" height="74"></rect>
-          <path d="M320 196 v-12 h14 v12" ></path>
-        </g>
-        <rect x="0" y="268" width="400" height="32" fill="rgba(0,0,0,.5)"></rect>
-        <g class="shoe"><path d="M150 262 c10 0 18 -3 22 -12 l4 -9 c10 5 17 6 24 5 l3 11 c1 6 -2 9 -8 9 H156 a5 5 0 0 1 -6 -4z" fill="#F8F1E7"></path><path d="M150 264 h54" stroke="#3E000D" stroke-width="3"></path><path d="M176 243 l4 6 M183 245 l4 6 M190 246 l3 6" stroke="#5B0F18" stroke-width="2.5" stroke-linecap="round"></path></g>
-        <g class="float f2"><circle cx="330" cy="70" r="22" fill="#F8F1E7"></circle><text x="330" y="76" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="700" fill="#3E000D">26.2</text><path d="M318 50 l-8 -22 M342 50 l8 -22" stroke="#F8F1E7" stroke-width="4"></path></g>
-        <g class="float f3"><path d="M60 80 S44 70 44 58 a8 8 0 0 1 16 -3 a8 8 0 0 1 16 3 c0 12 -16 22 -16 22z" fill="#F8F1E7" opacity=".8"></path></g>
-      </svg>
+  </section>
+  <div class="big-name" aria-hidden="true">Denisse Medina Flores</div>
+
+  <!-- ===== TWO TIMELINES ===== -->
+  <section id="timeline" style="width: 100%; max-width: 1120px; padding: 110px 16px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; flex-direction: column; gap: 8px; color: #F8F1E7">
+      <span style="font-size: 12px; letter-spacing: .24em; color: #F8F1E7; font-weight: 600">00 · HOW I GOT HERE</span>
+      <h2 class="headline" style="margin: 0">Two <em>timelines</em>, one Den</h2>
+      <p style="margin: 0; font-size: 15px; line-height: 1.6; max-width: 640px; color: rgba(248,241,231,.82)">Career on the left, life on the right, on the same years, so you can see how the kitchen, the classroom, the content and the café platform all connect.</p>
     </div>
+    <div role="group" aria-label="Filter timeline" style="display: flex; gap: 10px; flex-wrap: wrap">
+      <sc-for list="{{tlFilters}}" as="f" hint-placeholder-count="3">
+        <button class="tl-filter" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}"><span aria-hidden="true" style="{{f.dot}}"></span>{{f.label}}</button>
+      </sc-for>
+    </div>
+    <div class="tl-head" aria-hidden="true"><span style="text-align: right">CAREER ·  WORK, SCHOOL &amp; VENTURES</span><span></span><span>PERSONAL · COMMUNITY, CRAFT &amp; MILES</span></div>
+    <ol style="list-style: none; margin: 0; padding: 0">
+      <sc-for list="{{tlRows}}" as="r" hint-placeholder-count="3">
+        <li class="tl-row">
+          <div class="tl-y"><span class="tl-yr">{{r.year}}</span></div>
+          <div class="tl-c" style="{{r.cStyle}}"><sc-for list="{{r.career}}" as="it" hint-placeholder-count="1"><article class="tl-card career"><span class="tl-mtag">CAREER</span><span class="tl-when">{{it.when}}</span><span class="tl-title">{{it.title}}</span><span class="tl-org">{{it.org}}</span><span class="tl-body">{{it.body}}</span><span class="tl-tags"><sc-for list="{{it.tags}}" as="t" hint-placeholder-count="2"><span class="tl-tag">{{t}}</span></sc-for></span></article></sc-for></div>
+          <div class="tl-p" style="{{r.pStyle}}"><sc-for list="{{r.life}}" as="it" hint-placeholder-count="1"><article class="tl-card life"><span class="tl-mtag">PERSONAL</span><span class="tl-when">{{it.when}}</span><span class="tl-title">{{it.title}}</span><span class="tl-org">{{it.org}}</span><span class="tl-body">{{it.body}}</span><span class="tl-tags"><sc-for list="{{it.tags}}" as="t" hint-placeholder-count="2"><span class="tl-tag">{{t}}</span></sc-for></span></article></sc-for></div>
+        </li>
+      </sc-for>
+    </ol>
+    <p style="margin: 0; font-family: 'Caveat', cursive; font-size: 24px; color: #F8F1E7; text-align: center">The next stop on the left could be your team. ↗</p>
   </section>
 
   <!-- ===== MARATHON ===== -->
@@ -333,22 +430,36 @@ body{font-family:'Montserrat',system-ui,sans-serif!important}
     <div style="display: flex; flex-direction: column; gap: 8px; color: #F8F1E7">
       <span style="font-size: 12px; letter-spacing: .24em; color: #F8F1E7; font-weight: 600">04 · FUN FACT</span>
       <h2 class="headline" style="margin: 0">I type 108 WPM. <em>Your turn.</em></h2>
-      <p style="margin: 0; font-size: 15px; color: rgba(248,241,231,.82)">My average is 108 words per minute, and my record is 158. Type the order below and see how you stack up.</p>
+      <p style="margin: 0; font-size: 15px; line-height: 1.6; max-width: 640px; color: rgba(248,241,231,.82)">My average is 108 words per minute and my record is 158. Pick a topic from my world and a level, then type. The timer starts on your first key.</p>
     </div>
-    <div class="mono" style="background: #3E000D; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 18px; color: #F8F1E7; border-top: 6px solid #F8F1E7">
-      <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; letter-spacing: .14em">
-        <span>YOU: <strong style="font-family: 'Playfair Display', Georgia, serif; font-size: 28px; color: #F8F1E7; letter-spacing: 0">{{wpm}}</strong> WPM</span>
-        <span>DEN: <strong style="font-family: 'Playfair Display', Georgia, serif; font-size: 28px; letter-spacing: 0">108</strong> WPM</span>
-        <span>ACCURACY: <strong style="font-family: 'Playfair Display', Georgia, serif; font-size: 28px; letter-spacing: 0">{{acc}}%</strong></span>
+    <div class="mono" style="background: #3E000D; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 20px; color: #F8F1E7; border-top: 6px solid #F8F1E7">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 11px; letter-spacing: .2em; color: rgba(248,241,231,.7)">1 · PICK A TOPIC</span>
+        <div role="group" aria-label="Topic" style="display: flex; gap: 8px; flex-wrap: wrap">
+          <sc-for list="{{wTopics}}" as="t" hint-placeholder-count="7"><button class="wpm-chip" aria-pressed="{{t.pressed}}" onClick="{{t.pick}}">{{t.label}}</button></sc-for>
+        </div>
       </div>
-      <div aria-hidden="true" style="font-size: 20px; line-height: 1.7; letter-spacing: .02em">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 11px; letter-spacing: .2em; color: rgba(248,241,231,.7)">2 · PICK A LEVEL</span>
+        <div class="wpm-lvls" role="group" aria-label="Difficulty">
+          <sc-for list="{{wLevels}}" as="l" hint-placeholder-count="4"><button class="wpm-lvl" aria-pressed="{{l.pressed}}" onClick="{{l.pick}}"><span style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .08em">{{l.label}}</span><span style="font-size: 10.5px; letter-spacing: .1em; opacity: .8">GOAL {{l.goal}} WPM</span><span style="font-family: 'Caveat', cursive; font-size: 17px; letter-spacing: 0; opacity: .9">{{l.note}}</span></button></sc-for>
+        </div>
+      </div>
+      <div class="wpm-stats" role="status" aria-live="off">
+        <div class="wpm-stat">YOUR TIME<strong>{{wTime}}</strong></div>
+        <div class="wpm-stat">YOUR WPM<strong>{{wpm}}</strong></div>
+        <div class="wpm-stat">ACCURACY<strong>{{acc}}%</strong></div>
+        <div class="wpm-stat">DEN'S TIME<strong>{{denTime}}</strong></div>
+      </div>
+      <div aria-hidden="true" style="font-size: 20px; line-height: 1.7; letter-spacing: .02em; min-height: 68px">
         <sc-for list="{{chars}}" as="ch" hint-placeholder-count="60"><span style="{{ch.style}}">{{ch.c}}</span></sc-for>
       </div>
-      <label for="typer" style="font-size: 12px; letter-spacing: .14em; color: rgba(248,241,231,.7)">TYPE HERE: “{{target}}”</label>
-      <input id="typer" type="text" autocomplete="off" spellcheck="false" value="{{typed}}" onChange="{{onType}}" style="background: transparent; border: 1.5px dashed rgba(248,241,231,.5); border-radius: 8px; padding: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: #F8F1E7" />
-      <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap">
+      <label for="typer" style="font-size: 12px; letter-spacing: .14em; color: rgba(248,241,231,.7)">3 · TYPE HERE: “{{target}}”</label>
+      <input id="typer" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" value="{{typed}}" onChange="{{onType}}" onPaste="{{noPaste}}" style="background: transparent; border: 1.5px dashed rgba(248,241,231,.5); border-radius: 8px; padding: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: #F8F1E7" />
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
         <sc-if value="{{typeDone}}" hint-placeholder-val="{{ false }}"><span class="stamp-in" style="display: inline-block; border: 3px solid #F8F1E7; color: #F8F1E7; font-weight: 700; letter-spacing: .12em; padding: 8px 14px">{{typeVerdict}}</span></sc-if>
-        <button onClick="{{resetType}}" style="background: none; border: 1.5px solid rgba(248,241,231,.6); color: #F8F1E7; border-radius: 999px; padding: 10px 16px; font-size: 12px; letter-spacing: .1em; min-height: 44px">RESET</button>
+        <button onClick="{{newPhrase}}" style="background: #F8F1E7; border: 1.5px solid #F8F1E7; color: #3E000D; border-radius: 999px; padding: 10px 18px; font-size: 12px; font-weight: 700; letter-spacing: .1em; min-height: 44px">NEW PHRASE ↻</button>
+        <button onClick="{{resetType}}" style="background: none; border: 1.5px solid rgba(248,241,231,.6); color: #F8F1E7; border-radius: 999px; padding: 10px 16px; font-size: 12px; letter-spacing: .1em; min-height: 44px">RETRY SAME</button>
       </div>
     </div>
   </section>
@@ -356,30 +467,61 @@ body{font-family:'Montserrat',system-ui,sans-serif!important}
   <!-- ===== SHELF ===== -->
   <section id="shelf" style="width: 100%; max-width: 1120px; padding: 110px 16px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
     <div style="display: flex; flex-direction: column; gap: 8px; color: #F8F1E7">
-      <span style="font-size: 12px; letter-spacing: .24em; color: #F8F1E7; font-weight: 600">05 · THE SHELF</span>
-      <h2 class="headline" style="margin: 0">Currently reading &amp; <em>into</em></h2>
+      <span style="font-size: 12px; letter-spacing: .24em; color: #F8F1E7; font-weight: 600">05 · THE SHELF · CURRENT &amp; PAST READS</span>
+      <h2 class="headline" style="margin: 0">On my <em>shelf</em></h2>
     </div>
-    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
-      <div style="flex: 1 1 440px; background: #3E000D; border-radius: 16px; padding: 28px 28px 0; display: flex; flex-direction: column; gap: 18px; color: #F8F1E7">
-        <span style="font-size: 12px; letter-spacing: .18em; font-weight: 700; color: #F8F1E7">PM READING LIST · PULL A BOOK</span>
-        <div style="display: flex; gap: 10px; align-items: flex-end; height: 210px; border-bottom: 14px solid #5B0F18; padding: 0 8px">
-          <sc-for list="{{books}}" as="bk" hint-placeholder-count="4">
-            <button class="book" onClick="{{bk.pick}}" aria-pressed="{{bk.pressed}}" aria-label="{{bk.title}}" style="{{bk.style}}">
-              <span style="writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; font-weight: 700; letter-spacing: .06em; padding: 12px 0; white-space: nowrap; overflow: hidden; max-height: 90%">{{bk.spine}}</span>
-            </button>
-          </sc-for>
-          <svg class="float" width="60" height="70" viewBox="0 0 60 70" aria-hidden="true" style="margin-left: auto"><path d="M10 26 h36 v24 a12 12 0 0 1 -12 12 h-12 a12 12 0 0 1 -12 -12z" fill="#F8F1E7"></path><path d="M46 32 q12 0 10 12 q-2 8 -10 7" stroke="#F8F1E7" stroke-width="4" fill="none"></path><path d="M20 20 c-4 -6 4 -8 0 -14 M30 20 c-4 -6 4 -8 0 -14" stroke="rgba(248,241,231,.6)" stroke-width="2.5" fill="none"></path></svg>
+
+    <!-- interactive bookshelf -->
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #F8F1E7">
+        <span style="font-size: 12px; letter-spacing: .14em; opacity: .8">HOVER TO PULL A BOOK · CLICK TO SEE THE COVER</span>
+        <div style="display: flex; gap: 8px">
+          <button class="shelf-arrow" onClick="{{shelfPrev}}" aria-label="Previous book"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m11 6-6 6 6 6"></path></svg></button>
+          <button class="shelf-arrow" onClick="{{shelfNext}}" aria-label="Next book"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></button>
         </div>
-        <sc-for list="{{books}}" as="bk" hint-placeholder-count="1">
-          <sc-if value="{{bk.active}}" hint-placeholder-val="{{ true }}">
-            <div class="fade-up" style="display: flex; flex-direction: column; gap: 6px; padding-bottom: 26px">
-              <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 700">{{bk.title}}</span>
-              <span style="font-size: 13px; color: rgba(248,241,231,.7)">{{bk.author}}</span>
-              <span style="font-size: 14px; line-height: 1.55; color: rgba(248,241,231,.9)">{{bk.note}}</span>
-            </div>
-          </sc-if>
+      </div>
+      <div class="shelf">
+        <sc-for list="{{books}}" as="bk" hint-placeholder-count="8">
+          <button class="{{bk.cls}}" onClick="{{bk.pick}}" aria-pressed="{{bk.pressed}}" aria-label="{{bk.label}}" style="{{bk.style}}">
+            <sc-if value="{{bk.spineView}}" hint-placeholder-val="{{ true }}">
+              <span class="spine-title">{{bk.spine}}</span>
+              <span class="spine-mark" style="{{bk.markStyle}}">D</span>
+            </sc-if>
+            <sc-if value="{{bk.coverView}}" hint-placeholder-val="{{ false }}">
+              <span class="cover-in" style="{{bk.coverStyle}}">
+                <span style="font-size: 10px; letter-spacing: .2em; font-weight: 700; opacity: .75">{{bk.kicker}}</span>
+                <span style="flex: 1; display: flex; align-items: center; justify-content: center">
+                  <sc-if value="{{bk.mBulb}}" hint-placeholder-val="{{ false }}"><svg width="96" height="96" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M17 30c-3-2.5-5-6-5-10a12 12 0 0 1 24 0c0 4-2 7.5-5 10v4H17z"></path><path d="M18 38h12M20 42h8"></path><path d="M24 2v3M8 8l2 2M40 8l-2 2M3 20h3M42 20h3"></path></svg></sc-if>
+                  <sc-if value="{{bk.mPyramid}}" hint-placeholder-val="{{ false }}"><svg width="110" height="96" viewBox="0 0 56 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M28 4 52 44H4z"></path><path d="M10.5 33h35M16.5 23h23M22.5 13h11"></path></svg></sc-if>
+                  <sc-if value="{{bk.mCrack}}" hint-placeholder-val="{{ false }}"><svg width="100" height="100" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="36" height="36" rx="3"></rect><path d="M24 6l-4 10 7 6-6 8 5 6-2 6"></path></svg></sc-if>
+                  <sc-if value="{{bk.mLoop}}" hint-placeholder-val="{{ false }}"><svg width="100" height="100" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 34c0-12 8-20 16-20s12 6 12 12-5 9-9 9-7-3-7-7 3-6 6-6"></path><path d="m34 8 6 6-6 6"></path><path d="M40 14H28"></path></svg></sc-if>
+                  <sc-if value="{{bk.mPlus}}" hint-placeholder-val="{{ false }}"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></sc-if>
+                </span>
+                <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 26px; font-weight: 700; line-height: 1.05">{{bk.title}}</span>
+                <span style="font-size: 11px; letter-spacing: .08em; opacity: .8">{{bk.author}}</span>
+              </span>
+            </sc-if>
+          </button>
         </sc-for>
       </div>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; min-height: 54px; color: #F8F1E7; text-align: center">
+        <sc-if value="{{noBook}}" hint-placeholder-val="{{ false }}">
+          <span style="font-size: 14px; opacity: .8">Pick a book off the shelf.</span>
+        </sc-if>
+        <sc-for list="{{openBook}}" as="ob" hint-placeholder-count="1">
+          <div class="fade-up" style="display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"></path><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"></path></svg>
+            <span class="vg" style="font-size: 26px">{{ob.title}}</span>
+            <span style="font-size: 13px; opacity: .75">{{ob.author}}</span>
+            <span style="font-size: 10px; letter-spacing: .14em; font-weight: 700; padding: 5px 10px; border: 1px solid rgba(248,241,231,.45); border-radius: 999px">{{ob.status}}</span>
+            <a href="#" style="font-size: 13px; font-weight: 600">My notes [LINK] →</a>
+            <button class="ghost-btn" onClick="{{putBack}}" style="min-height: 38px; padding: 7px 14px; font-size: 11px">PUT BACK</button>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
       <div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 16px">
         <div style="border: 1.5px solid rgba(248,241,231,.3); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
           <span style="font-size: 12px; letter-spacing: .18em; font-weight: 700; color: #F8F1E7">ALSO INTO</span>
@@ -457,17 +599,101 @@ var SHIFTS = [
     { label: 'Wind down', sub: 'Focus mode on, jazz on, screens off', time: 'LATE' }] }
 ];
 var BOOKS = [
-  { title: 'Inspired', author: 'Marty Cagan', spine: 'INSPIRED', note: '[YOUR BIGGEST TAKEAWAY]', color: '#F8F1E7', fg: '#3E000D', h: 190 },
-  { title: 'The Lean Product Playbook', author: 'Dan Olsen', spine: 'LEAN PRODUCT PLAYBOOK', note: '[YOUR BIGGEST TAKEAWAY]', color: '#5B0F18', fg: '#F8F1E7', h: 176 },
-  { title: 'Cracking the PM Interview', author: 'Gayle Laakmann McDowell & Jackie Bavaro', spine: 'CRACKING THE PM INTERVIEW', note: '[YOUR BIGGEST TAKEAWAY]', color: '#F8F1E7', fg: '#3E000D', h: 200 },
-  { title: 'Design for How People Learn', author: 'Julie Dirksen', spine: 'DESIGN FOR HOW PEOPLE LEARN', note: 'Five years of teaching workshops made this one personal. [YOUR TAKEAWAY]', color: '#5B0F18', fg: '#F8F1E7', h: 184 }
+  { title: 'Inspired', author: 'Marty Cagan', spine: 'INSPIRED', status: 'PM READING LIST', motif: 'bulb', bg: '#F8F1E7', fg: '#3E000D', w: 58, h: 300 },
+  { title: 'The Lean Product Playbook', author: 'Dan Olsen', spine: 'THE LEAN PRODUCT PLAYBOOK', status: 'PM READING LIST', motif: 'pyramid', bg: '#5B0F18', fg: '#F8F1E7', w: 64, h: 320 },
+  { title: 'Cracking the PM Interview', author: 'G. L. McDowell & J. Bavaro', spine: 'CRACKING THE PM INTERVIEW', status: 'PM READING LIST', motif: 'crack', bg: '#3E000D', fg: '#F8F1E7', w: 70, h: 330, edge: true },
+  { title: 'Design for How People Learn', author: 'Julie Dirksen', spine: 'DESIGN FOR HOW PEOPLE LEARN', status: 'PM READING LIST', motif: 'loop', bg: '#F8F1E7', fg: '#5B0F18', w: 62, h: 310 },
+  { title: '[Your book]', author: '[Author]', spine: 'YOUR NEXT READ', status: 'ADD A BOOK', motif: 'plus', ghost: true, w: 52, h: 290 },
+  { title: '[Your book]', author: '[Author]', spine: 'YOUR NEXT READ', status: 'ADD A BOOK', motif: 'plus', ghost: true, w: 56, h: 305 },
+  { title: '[Your book]', author: '[Author]', spine: 'YOUR NEXT READ', status: 'ADD A BOOK', motif: 'plus', ghost: true, w: 50, h: 280 },
+  { title: '[Your book]', author: '[Author]', spine: 'YOUR NEXT READ', status: 'ADD A BOOK', motif: 'plus', ghost: true, w: 54, h: 300 }
+];
+var TIMELINE = [
+  { year: 'BEFORE TECH', career: [
+    { when: 'THE KITCHEN YEARS · [YEARS]', title: 'Culinary arts & line cook', org: 'Freelance line chef', body: 'Where I learned speed, systems and calm under pressure. A busy line is a live product launch every night.', tags: ['OPS', 'PRESSURE', 'SYSTEMS'] }],
+    life: [
+    { when: 'ROOTS', title: 'Born & raised in the Bronx', org: 'NYC · bilingual EN / ES', body: 'Grew up switching between English and Spanish, which is why I still build and teach for both.', tags: ['HOME', 'EN / ES'] }] },
+  { year: '2019', career: [
+    { when: '2019 – 2020', title: 'Youth Leader', org: 'College Access: Research and Action (CARA)', body: 'Guided 30+ high school students through college applications and FAFSA, with templates and checklists so no deadline was missed.', tags: ['MENTORING', 'PROCESS'] }], life: [] },
+  { year: '2020', career: [
+    { when: '2020 – 2022', title: 'Lehman College & Peer Educator', org: 'CUNY Lehman College', body: 'Coursework while running events, Canva promo, outreach campaigns and Excel tracking for the Career Exploration & Development Center.', tags: ['EVENTS', 'OUTREACH'] }], life: [] },
+  { year: '2021', career: [
+    { when: '2021 – 2022', title: 'Development', org: 'Museum of Jewish Heritage', body: 'Kept donor databases accurate and secure, built reports for senior management and automated routine data entry.', tags: ['DATA', 'REPORTING'] },
+    { when: 'SEPT 2021 – JUNE 2026', title: 'Presenter', org: 'Elevate Education', body: 'Bilingual study-skills workshops across NYC schools, a multi-site schedule and feedback data used to refine every session.', tags: ['FACILITATION', 'EN / ES'] }],
+    life: [
+    { when: '[YEARS] · 5 YEARS', title: 'Theta Phi Gamma', org: 'Sorority sister', body: 'Five years of sisterhood, events and showing up for each other. [ROLE / WHAT YOU LED]', tags: ['COMMUNITY'] }] },
+  { year: '2023', career: [], life: [
+    { when: '[YEAR]', title: 'Became a creator on Lemon8', org: 'DensDigitalDiary', body: 'Started posting and grew to 1.8M+ reach, which turned into UGC work for startups like Love8 and xTiles.', tags: ['CONTENT', '1.8M+ REACH'] }] },
+  { year: '2024', career: [
+    { when: '2024 – 2025', title: 'Coordinator of Religious Education', org: 'Christ the King', body: 'Financial operations for 300+ families, progress tracking for 300+ students across three programs, and a team of volunteers.', tags: ['OPS', 'STAKEHOLDERS'] },
+    { when: '[YEAR] · 2.5+ YEARS', title: 'Social media manager & brand strategist', org: 'Freelance · now DensDigitalDiary Agency', body: 'Strategy and content for small brands and independent music talent.', tags: ['BRAND', 'GROWTH'] }], life: [] },
+  { year: '2025', career: [
+    { when: 'MARCH 2025', title: 'Founded Work & Brew', org: 'Co-founder & product lead', body: 'A platform for vetted, work-friendly independent NYC cafés. I lead a team of under ten scouts, designers and developers.', tags: ['0→1', 'LEADERSHIP', 'DISCOVERY'] },
+    { when: 'DECEMBER 2025', title: 'Full-stack graduate', org: 'BloomTech', body: 'React, JavaScript, SQL and REST APIs, so I can talk to engineers in their language.', tags: ['REACT', 'SQL'] }],
+    life: [
+    { when: 'SUMMER 2025', title: "Steve's Camp at Horizon Farms", org: 'Head chef & mentor', body: 'Cooked for camp and mentored youth in outdoor leadership, resilience and community building.', tags: ['KITCHEN', 'MENTORING'] }] },
+  { year: '2026', career: [
+    { when: '2026', title: 'PM certifications', org: 'UVA · Google · Atlassian', body: 'Digital Product Management (UVA), Google AI Essentials, Jira Service Management and Google Analytics fundamentals.', tags: ['PM', 'AI', 'ANALYTICS'] },
+    { when: '2026', title: 'Building in public', org: 'Seven Solace Co. · Runner\u2019s Hub · this site', body: 'A handmade charms shop getting ready to launch, tools for runners, and this portfolio, built with Claude Code and Cursor.', tags: ['SHIP', 'AI-AUGMENTED'] }],
+    life: [
+    { when: '2026', title: 'Social Café Pop-Up No. 001', org: 'Fundraiser for Team for Kids', body: 'Work & Brew\u2019s first pop-up raised money toward a $4K goal for youth running programs.', tags: ['COMMUNITY', 'EVENTS'] },
+    { when: '2026', title: 'Imparando l\u2019italiano', org: 'Third language', body: 'Learning Italian, one café at a time.', tags: ['LANGUAGES'] },
+    { when: 'Q4 2026', title: 'Back on Lemon8', org: 'Content comeback', body: 'Rebuilding my content portfolio by featuring startup apps I actually use.', tags: ['CONTENT'] }] },
+  { year: '2027', career: [
+    { when: 'NEXT', title: 'APM / PM on your team', org: 'NYC · open to it', body: 'Bringing founder instincts, a builder\u2019s toolkit and a lot of user empathy to a product team.', tags: ['APM', 'PM'] }],
+    life: [
+    { when: 'NOV 7, 2027', title: 'TCS NYC Marathon', org: 'Running with Team for Kids', body: 'Officially deferred from 2026. All five boroughs, 26.2 miles, mile 20 in the Bronx.', tags: ['26.2', 'FIVE BOROUGHS'] }] }
 ];
 var LANGS = [
   { hi: 'Hello!', name: 'ENGLISH', level: 'Native / bilingual · born and raised in NYC' },
   { hi: '¡Hola!', name: 'ESPAÑOL', level: 'Native / bilingual · 5 years of bilingual facilitation' },
   { hi: 'Ciao!', name: 'ITALIANO', level: 'Elementary · currently learning' }
 ];
-var TARGET = 'One café con leche, one matcha latte and a product spec with an extra shot of user empathy.';
+var W_TOPICS = [
+  { id: 'mix', label: 'SURPRISE ME' },
+  { id: 'coffee', label: 'CAFÉS & COFFEE', phrases: ['order a cafe con leche', 'find a seat with an outlet', 'the wifi password is on the menu', 'laptops are welcome until noon', 'one oat milk latte to go', 'matcha first then emails', 'save me a table by the window', 'cold brew makes deep work easier', 'every good idea starts with coffee', 'the best cafes are a little hidden'],
+    spice: ['2 lattes & 1 matcha: $14.50', 'Table #7 has 3 outlets!', 'Open 7am-7pm (Mon-Fri)'] },
+  { id: 'product', label: 'PRODUCT & TECH', phrases: ['talk to users before you build', 'ship the smallest useful version', 'write the problem down first', 'the roadmap is a guess not a promise', 'measure what matters', 'say no to most good ideas', 'the user is not always you', 'test the riskiest assumption first', 'a clear spec saves a long meeting', 'push the code and open a pull request'],
+    spice: ['P0 bugs first; P2 can wait.', 'v1.0 ships Friday @ 9am!', 'const order = { size: "L" };'] },
+  { id: 'running', label: 'RUNNING', phrases: ['easy miles build the base', 'slow down on the hills', 'drink water before you feel thirsty', 'mile twenty is in the Bronx', 'rest days count as training', 'lace up and get out the door', 'the long run is on Sunday', 'run your own race', 'every finish line starts with one step', 'cheer for the runners behind you'],
+    spice: ['26.2 miles = 42.2 km!', 'Goal pace: 9:30/mile?', '5 boroughs, 1 finish line.'] },
+  { id: 'kitchen', label: 'THE KITCHEN', phrases: ['mise en place before service', 'taste as you go', 'salt the pasta water', 'keep your station clean', 'behind you with a hot pan', 'yes chef heard chef', 'low and slow makes the best sauce', 'sharp knives are safer knives', 'plate it like you mean it', 'the line moves fast on Friday nights'],
+    spice: ['Bake at 425F for 12-15 min.', '2 cups flour + 1 tsp salt', '86 the salmon @ table 4!'] },
+  { id: 'content', label: 'CONTENT', phrases: ['post the draft not the perfect one', 'hook them in three seconds', 'batch film on Sunday', 'reply to every comment', 'show the process not just the result', 'consistency beats going viral', 'save this for later', 'plan the month in Notion', 'good lighting fixes everything', 'tell the story behind it'],
+    spice: ['Post at 6:30pm (EST)!', '#ProjectMe: day 1/84', '3 hooks, 2 takes & 1 post.'] }
+];
+var W_LEVELS = [
+  { id: 'easy', label: 'EASY', goal: 40, words: 12, spice: 0, note: 'warm-up lap' },
+  { id: 'hard', label: 'HARD', goal: 80, words: 20, spice: 0, note: 'caps & periods' },
+  { id: 'extra', label: 'EXTRA HARD', goal: 108, words: 28, spice: 1, note: "Den's level" },
+  { id: 'extreme', label: 'EXTREME', goal: 158, words: 38, spice: 3, note: "beyond Den's record" }
+];
+function wShuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function wCap(x) { return x.charAt(0).toUpperCase() + x.slice(1); }
+function makePhrase(topicId, levelId) {
+  var lv = W_LEVELS.filter(function (l) { return l.id === levelId; })[0] || W_LEVELS[0];
+  var pool = [], spice = [];
+  W_TOPICS.forEach(function (t) { if (t.phrases && (topicId === 'mix' || t.id === topicId)) { pool = pool.concat(t.phrases); spice = spice.concat(t.spice); } });
+  var picks = [], n = 0, bag = wShuffle(pool);
+  while (n < lv.words && bag.length) { var ph = bag.shift(); picks.push(ph); n += ph.split(' ').length; }
+  if (lv.id === 'easy') return picks.join(' ').toLowerCase();
+  var ends = lv.id === 'hard' ? ['.'] : ['.', '.', ',', '!'];
+  var out = picks.map(function (ph, i) { return { t: ph, e: i === picks.length - 1 ? '.' : ends[Math.floor(Math.random() * ends.length)] }; });
+  var sp = wShuffle(spice).slice(0, lv.spice);
+  sp.forEach(function (x) {
+    var at = 1 + Math.floor(Math.random() * out.length);
+    if (out[at - 1].e === ',') out[at - 1].e = '.';
+    out.splice(at, 0, { t: x + (/[.!?);]$/.test(x) ? '' : '.'), e: '', raw: true });
+  });
+  var txt = '', cap = true;
+  out.forEach(function (o, i) {
+    var w = o.raw ? o.t : (cap ? wCap(o.t) : o.t);
+    txt += (i ? ' ' : '') + w + o.e;
+    cap = o.raw ? true : o.e !== ',';
+  });
+  return txt;
+}
+function fmtClock(ms) { var t = Math.max(0, ms) / 1000, m = Math.floor(t / 60), sec = t - m * 60; return m + ':' + (sec < 10 ? '0' : '') + sec.toFixed(1); }
 var SERIES = ['Project Me', 'Marathon Training', 'Tech With Den', 'Real Talk With Den', 'Small Business Saturdays'];
 
 function fmt(mins) { var m = Math.floor(mins), sec = Math.round((mins - m) * 60); if (sec === 60) { m++; sec = 0; } return m + ':' + (sec < 10 ? '0' : '') + sec; }
@@ -475,7 +701,7 @@ function fmt(mins) { var m = Math.floor(mins), sec = Math.round((mins - m) * 60)
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { blend: 'espresso', time: '', days: 0, goal: 275, leg: 4, lang: 0, typed: '', tStart: 0, tEnd: 0, flipped: [], shift: 'am', done: [], book: 0, cheers: 0, toast: '' };
+    this.state = { blend: 'espresso', time: '', days: 0, goal: 275, leg: 4, lang: 0, typed: '', tStart: 0, tEnd: 0, tNow: 0, wTopic: 'coffee', wLevel: 'extra', target: makePhrase('coffee', 'extra'), flipped: [], tl: 'both', shift: 'am', done: [], book: 0, cheers: 0, toast: '' };
   }
   componentDidMount() {
     var self = this;
@@ -499,8 +725,123 @@ class Component extends DCLogic {
     };
     tick();
     this.clock = setInterval(tick, 1000);
+    this.badgeInit();
   }
-  componentWillUnmount() { window.removeEventListener('scroll', this.onScroll); clearInterval(this.clock); clearTimeout(this.toastT); }
+  componentWillUnmount() { window.removeEventListener('scroll', this.onScroll); clearInterval(this.clock); clearTimeout(this.toastT); clearInterval(this.tInt); this.badgeStop(); }
+  /* ---- lanyard badge physics (direct DOM writes, no re-render per frame) ---- */
+  badgeEls(el) {
+    var b = this.bd;
+    if (b.card && b.card.isConnected) return true;
+    var card = el || (typeof document !== 'undefined' ? document.querySelector('[data-badge]') : null);
+    if (!card) return false;
+    var stage = card.closest('[data-badge-stage]');
+    b.card = card; b.stage = stage;
+    b.a = stage.querySelector('[data-strand=a]'); b.b = stage.querySelector('[data-strand=b]'); b.c = stage.querySelector('[data-strand=c]');
+    return true;
+  }
+  badgeInit(el) {
+    var self = this;
+    if (!this.bd) this.bd = { x: 0, y: 0, vx: 0, vy: 0, r: 0, vr: 0, drag: false, run: false, ready: false };
+    if (!this.badgeEls(el)) { if (!el) setTimeout(function () { self.badgeInit(); }, 300); return; }
+    var b = this.bd;
+    if (!b.ready) {
+      b.ready = true;
+      var W = b.stage.clientWidth;
+      b.x = W / 2 - 70; b.y = 150; b.vx = 7; b.vy = 0; b.r = 14; b.vr = 0;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { b.x = W / 2; b.y = this.badgeL(); b.vx = 0; b.r = 0; }
+      this.onBadgeResize = function () { self.badgeWake(); };
+      window.addEventListener('resize', this.onBadgeResize);
+    }
+    this.badgeWake();
+  }
+  badgeL() { return Math.min(240, Math.max(180, (this.bd.stage ? this.bd.stage.clientHeight : 580) - 360)); }
+  badgeWake() {
+    var self = this, b = this.bd;
+    if (!b || b.run) return;
+    b.run = true; b.last = 0;
+    var step = function (t) {
+      if (!b.run) return;
+      var dt = b.last ? Math.min(2.5, (t - b.last) / 16.67) : 1; b.last = t;
+      var moving = self.badgeStep(dt);
+      self.badgeDraw();
+      if (moving || b.drag) b.raf = requestAnimationFrame(step); else b.run = false;
+    };
+    b.raf = requestAnimationFrame(step);
+  }
+  badgeStop() { if (this.bd) { this.bd.run = false; cancelAnimationFrame(this.bd.raf); } if (this.onBadgeResize) window.removeEventListener('resize', this.onBadgeResize); if (this.onBadgeMove) { window.removeEventListener('pointermove', this.onBadgeMove); window.removeEventListener('pointerup', this.onBadgeUp); window.removeEventListener('pointercancel', this.onBadgeUp); } }
+  badgeStep(dt) {
+    var b = this.bd, W = b.stage.clientWidth, ax = W / 2, ay = -50, L = this.badgeL();
+    if (!b.drag) {
+      b.vy += 0.75 * dt;
+      var damp = Math.pow(0.993, dt); b.vx *= damp; b.vy *= damp;
+      b.x += b.vx * dt; b.y += b.vy * dt;
+    }
+    // rope: can go slack, never longer than L
+    var dx = b.x - ax, dy = b.y - ay, d = Math.sqrt(dx * dx + dy * dy);
+    if (d > L) {
+      var nx = dx / d, ny = dy / d;
+      b.x = ax + nx * L; b.y = ay + ny * L;
+      var vn = b.vx * nx + b.vy * ny;
+      if (vn > 0) { b.vx -= vn * nx * 1.05; b.vy -= vn * ny * 1.05; }
+      dx = b.x - ax; dy = b.y - ay;
+    }
+    // soft walls
+    var pad = 70;
+    if (b.x < pad) { b.x = pad; if (b.vx < 0) b.vx *= -0.5; }
+    if (b.x > W - pad) { b.x = W - pad; if (b.vx > 0) b.vx *= -0.5; }
+    if (b.y < -40) { b.y = -40; if (b.vy < 0) b.vy *= -0.4; }
+    // card rotation follows the rope with a little lag + swing from motion
+    var target = -Math.atan2(dx, Math.max(1, dy)) * 57.3;
+    if (d < L * 0.92) target = target * 0.4;
+    b.vr += ((target - b.r) * 0.05 - b.vx * 0.05) * dt;
+    b.vr *= Math.pow(0.86, dt);
+    b.r += b.vr * dt;
+    b.r = Math.max(-75, Math.min(75, b.r));
+    var e = Math.abs(b.vx) + Math.abs(b.vy) + Math.abs(b.vr) + Math.abs(target - b.r) * 0.1;
+    return e > 0.06 || d < L - 0.5;
+  }
+  badgeDraw() {
+    var b = this.bd, W = b.stage.clientWidth, ax = W / 2, ay = -50, L = this.badgeL();
+    b.card.style.transform = 'translate(' + (b.x - 115).toFixed(1) + 'px,' + b.y.toFixed(1) + 'px) rotate(' + b.r.toFixed(2) + 'deg)';
+    var rr = b.r / 57.3, ex = b.x + Math.sin(rr) * 26, ey = b.y - Math.cos(rr) * 26;
+    var dx = ex - ax, dy = ey - ay, d = Math.sqrt(dx * dx + dy * dy), sag = Math.max(0, L - d) * 0.7;
+    var path = function (sx) { var mx = (sx + ex) / 2, my = (ay - 60 + ey) / 2 + sag; return 'M' + sx.toFixed(1) + ' ' + (ay - 60) + ' Q' + mx.toFixed(1) + ' ' + my.toFixed(1) + ' ' + ex.toFixed(1) + ' ' + ey.toFixed(1); };
+    b.a.setAttribute('d', path(ax - 44)); b.b.setAttribute('d', path(ax + 44)); b.c.setAttribute('d', path(ax - 44));
+  }
+  badgeGrab(e) {
+    var self = this;
+    this.badgeInit(e.currentTarget);
+    var b = this.bd; if (!b || !b.stage) return;
+    e.preventDefault();
+    var rect = b.stage.getBoundingClientRect();
+    b.drag = true; b.ox = e.clientX - rect.left - b.x; b.oy = e.clientY - rect.top - b.y; b.vx = 0; b.vy = 0;
+    if (e.currentTarget.setPointerCapture) { try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {} }
+    this.onBadgeMove = function (ev) {
+      var r = b.stage.getBoundingClientRect();
+      var nx = ev.clientX - r.left - b.ox, ny = ev.clientY - r.top - b.oy;
+      b.vx = b.vx * 0.5 + (nx - b.x) * 0.5; b.vy = b.vy * 0.5 + (ny - b.y) * 0.5;
+      b.x = nx; b.y = ny;
+    };
+    this.onBadgeUp = function () {
+      b.drag = false;
+      b.vx = Math.max(-38, Math.min(38, b.vx)); b.vy = Math.max(-38, Math.min(38, b.vy));
+      window.removeEventListener('pointermove', self.onBadgeMove); window.removeEventListener('pointerup', self.onBadgeUp); window.removeEventListener('pointercancel', self.onBadgeUp);
+      self.badgeWake();
+    };
+    window.addEventListener('pointermove', this.onBadgeMove);
+    window.addEventListener('pointerup', this.onBadgeUp);
+    window.addEventListener('pointercancel', this.onBadgeUp);
+    this.badgeWake();
+  }
+  badgeNudge(e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    this.badgeInit(e.currentTarget);
+    if (!this.bd || !this.bd.stage) return;
+    this.bd.vx += (Math.random() < 0.5 ? -1 : 1) * 16; this.bd.vy -= 6;
+    this.badgeWake();
+  }
+  newRound(topic, level) { clearInterval(this.tInt); this.tInt = 0; this.setState({ wTopic: topic, wLevel: level, target: makePhrase(topic, level), typed: '', tStart: 0, tEnd: 0, tNow: 0 }); }
   showToast(msg) { var self = this; clearTimeout(this.toastT); this.setState({ toast: msg }); this.toastT = setTimeout(function () { self.setState({ toast: '' }); }, 3000); }
   mix(a, b, t) {
     var pa = [1, 3, 5].map(function (i) { return parseInt(a.substr(i, 2), 16); }), pb = [1, 3, 5].map(function (i) { return parseInt(b.substr(i, 2), 16); });
@@ -570,33 +911,67 @@ class Component extends DCLogic {
       allDone: pct === 100, doneStamp: sh.stamp,
       resetHabits: function () { self.setState({ done: s.done.filter(function (k) { return k.indexOf(sh.id) !== 0; }) }); },
       books: BOOKS.map(function (b, i) {
-        var on = s.book === i;
-        return { title: b.title, author: b.author, spine: b.spine, note: b.note, active: on, pressed: on ? 'true' : 'false',
-          style: 'height:' + b.h + 'px;background:' + b.color + ';color:' + b.fg + (on ? ';transform:translateY(-18px)' : ''),
-          pick: function () { self.setState({ book: i }); } };
+        var on = s.book === i, bg = b.ghost ? 'transparent' : b.bg, fg = b.ghost ? 'rgba(248,241,231,.7)' : b.fg;
+        var base = 'background:' + bg + ';color:' + fg + ';' + (b.ghost ? 'border:1.5px dashed rgba(248,241,231,.45);' : '') + (b.edge ? 'outline:1px solid rgba(248,241,231,.25);outline-offset:-1px;' : '');
+        return { label: (on ? 'Close ' : 'Open ') + b.title, pressed: on ? 'true' : 'false', cls: 'spine' + (on ? ' open' : ''),
+          style: base + 'width:' + (on ? 240 : b.w) + 'px;height:' + (on ? 340 : b.h) + 'px',
+          spineView: !on, coverView: on, spine: b.spine, title: b.title, author: b.author,
+          kicker: b.ghost ? 'COMING SOON' : "DEN'S SHELF",
+          markStyle: 'opacity:.7',
+          coverStyle: 'display:flex;flex-direction:column;gap:10px;width:100%;height:100%;box-sizing:border-box;padding:22px 20px;text-align:left;background:' + (b.ghost ? 'rgba(248,241,231,.04)' : b.bg) + ';color:' + fg + ';box-shadow:inset 8px 0 0 rgba(0,0,0,.12)',
+          mBulb: b.motif === 'bulb', mPyramid: b.motif === 'pyramid', mCrack: b.motif === 'crack', mLoop: b.motif === 'loop', mPlus: b.motif === 'plus',
+          pick: function () { self.setState({ book: on ? -1 : i }); } };
       }),
+      noBook: s.book < 0,
+      openBook: s.book < 0 ? [] : [{ title: BOOKS[s.book].title, author: BOOKS[s.book].author, status: BOOKS[s.book].status }],
+      putBack: function () { self.setState({ book: -1 }); },
+      shelfPrev: function () { self.setState({ book: s.book <= 0 ? BOOKS.length - 1 : s.book - 1 }); },
+      shelfNext: function () { self.setState({ book: (s.book + 1) % BOOKS.length }); },
       langs: LANGS.map(function (l, i) { return { hi: l.hi, name: l.name, level: l.level, active: s.lang === i }; }),
       nextLang: function () { self.setState({ lang: (s.lang + 1) % LANGS.length }); },
-      target: TARGET, typed: s.typed,
-      chars: TARGET.split('').map(function (c, i) {
-        var t = s.typed[i], st = t === undefined ? 'color:rgba(248,241,231,.35)' : t === c ? 'color:#F8F1E7' : 'color:#F8F1E7;text-decoration:underline';
+      target: s.target, typed: s.typed,
+      chars: s.target.split('').map(function (c, i) {
+        var t = s.typed[i], st = t === undefined ? 'color:rgba(248,241,231,.35)' : t === c ? 'color:#F8F1E7' : 'color:#3E000D;background:#F8F1E7;border-radius:2px';
         if (i === s.typed.length) st += ';border-left:2px solid #F8F1E7';
         return { c: c, style: st };
       }),
-      wpm: (function () { var end = s.tEnd || Date.now(); if (!s.tStart || !s.typed.length) return 0; var min = (end - s.tStart) / 60000; return min > 0 ? Math.round((s.typed.length / 5) / min) : 0; })(),
-      acc: (function () { if (!s.typed.length) return 100; var ok = 0; for (var i = 0; i < s.typed.length; i++) { if (s.typed[i] === TARGET[i]) ok++; } return Math.round(ok / s.typed.length * 100); })(),
+      wpm: (function () { if (!s.tStart || !s.typed.length) return 0; var min = ((s.tEnd || s.tNow || Date.now()) - s.tStart) / 60000, ok = 0; for (var i = 0; i < s.typed.length; i++) { if (s.typed[i] === s.target[i]) ok++; } return min > 0.0005 ? Math.round((ok / 5) / min) : 0; })(),
+      acc: (function () { if (!s.typed.length) return 100; var ok = 0; for (var i = 0; i < s.typed.length; i++) { if (s.typed[i] === s.target[i]) ok++; } return Math.round(ok / s.typed.length * 100); })(),
+      wTime: fmtClock(s.tStart ? (s.tEnd || s.tNow || s.tStart) - s.tStart : 0),
+      denTime: fmtClock((s.target.length / 5) / 108 * 60000),
       typeDone: !!s.tEnd,
-      typeVerdict: (function () { if (!s.tEnd) return ''; var w = Math.round((s.typed.length / 5) / ((s.tEnd - s.tStart) / 60000)); return w >= 158 ? 'NEW RECORD. HIRED.' : w >= 108 ? 'YOU BEAT DEN!' : w >= 70 ? 'FAST HANDS. RESPECT.' : 'ORDER UP. TRY AGAIN?'; })(),
+      typeVerdict: (function () {
+        if (!s.tEnd) return '';
+        var ok = 0; for (var i = 0; i < s.typed.length; i++) { if (s.typed[i] === s.target[i]) ok++; }
+        var w = Math.round((ok / 5) / ((s.tEnd - s.tStart) / 60000)), lv = W_LEVELS.filter(function (l) { return l.id === s.wLevel; })[0];
+        return w >= 158 ? 'BEYOND DEN’S RECORD. HIRED.' : w >= 108 ? 'YOU BEAT DEN!' : w >= lv.goal ? 'LEVEL CLEARED · ' + w + ' WPM' : 'SO CLOSE. GOAL IS ' + lv.goal + '. AGAIN?';
+      })(),
+      wTopics: W_TOPICS.map(function (t) { return { label: t.label, pressed: s.wTopic === t.id ? 'true' : 'false', pick: function () { self.newRound(t.id, s.wLevel); } }; }),
+      wLevels: W_LEVELS.map(function (l) { return { label: l.label, goal: l.goal, note: l.note, pressed: s.wLevel === l.id ? 'true' : 'false', pick: function () { self.newRound(s.wTopic, l.id); } }; }),
       onType: function (e) {
-        var v = e.target.value.slice(0, TARGET.length);
         if (s.tEnd) return;
-        var st = s.tStart || Date.now();
-        self.setState({ typed: v, tStart: v.length ? st : 0, tEnd: v === TARGET ? Date.now() : 0 });
+        var v = e.target.value.slice(0, s.target.length);
+        var st = s.tStart || (v.length ? Date.now() : 0);
+        var done = v.length === s.target.length;
+        if (st && !self.tInt && !done) self.tInt = setInterval(function () { self.setState({ tNow: Date.now() }); }, 100);
+        if (!v.length || done) { clearInterval(self.tInt); self.tInt = 0; }
+        self.setState({ typed: v, tStart: v.length ? st : 0, tEnd: done ? Date.now() : 0, tNow: Date.now() });
       },
-      resetType: function () { self.setState({ typed: '', tStart: 0, tEnd: 0 }); },
+      noPaste: function (e) { e.preventDefault(); self.showToast('Nice try. No pasting at this café.'); },
+      newPhrase: function () { self.newRound(s.wTopic, s.wLevel); },
+      resetType: function () { clearInterval(self.tInt); self.tInt = 0; self.setState({ typed: '', tStart: 0, tEnd: 0, tNow: 0 }); },
       series: SERIES,
       ombreStyle: this.scrollVals().ombreStyle, barStyle: this.scrollVals().barStyle,
-      hasToast: !!s.toast, toast: s.toast
+      tlFilters: [['both', 'BOTH TIMELINES', ''], ['career', 'CAREER', 'width:10px;height:10px;border-radius:3px;background:#F8F1E7;outline:1px solid rgba(62,0,13,.4)'], ['personal', 'PERSONAL', 'width:10px;height:10px;border-radius:3px;border:1.5px dashed currentColor;box-sizing:border-box']].map(function (f) {
+        return { label: f[1], dot: f[2] || 'display:none', pressed: s.tl === f[0] ? 'true' : 'false', pick: function () { self.setState({ tl: f[0] }); } };
+      }),
+      tlRows: TIMELINE.filter(function (r) { return s.tl === 'both' || (s.tl === 'career' ? r.career.length : r.life.length); }).map(function (r) {
+        return { year: r.year, career: s.tl === 'personal' ? [] : r.career, life: s.tl === 'career' ? [] : r.life,
+          cStyle: s.tl === 'personal' ? 'visibility:hidden' : '', pStyle: s.tl === 'career' ? 'visibility:hidden' : '' };
+      }),
+      hasToast: !!s.toast, toast: s.toast,
+      grabBadge: function (e) { self.badgeGrab(e); },
+      nudgeBadge: function (e) { self.badgeNudge(e); }
     };
   }
 }
