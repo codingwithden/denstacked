@@ -243,8 +243,8 @@ export default function LanyardBadge() {
               <span>{BADGE.no}</span>
             </div>
             <div className="mt-2.5 leading-[.86]">
-              <div className="font-headline text-[46px] tracking-[-.02em]">{BADGE.first}</div>
-              <div className="mt-1 pl-1.5 font-script text-[29px] whitespace-nowrap text-wine">
+              <div className="font-body text-[46px] tracking-[-.02em]">{BADGE.first}</div>
+              <div className="mt-1 pl-1.5 font-body text-[29px] italic whitespace-nowrap text-wine">
                 {BADGE.last}
               </div>
             </div>

@@ -15,15 +15,26 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-montserrat), system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
-  --font-retro: var(--font-bagel), cursive;
+  /* Body font: every piece of text that isn't a title. Change it here to restyle the whole site. */
+  --font-body: "Times New Roman", Times, serif;
+
+  /* Text styles, all on the body font for now (swap any of these to give it its own font). */
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-body);
+  --font-choed: var(--font-body);
+  --font-vogue: var(--font-body);
+  --font-seasons: var(--font-body);
+  --font-hand: var(--font-body);
+
+  /* Title fonts: page H1s, section headings, "Up next" titles and the big name. */
   --font-headline: var(--font-gloock), Georgia, serif;
+  --font-retro: var(--font-bagel), cursive;
   --font-script: var(--font-pinyon), cursive;
-  --font-choed: var(--font-abril), Georgia, serif;
-  --font-vogue: var(--font-bodoni), Didot, "Bodoni 72", serif;
-  --font-seasons: var(--font-playfair), Georgia, serif;
-  --font-hand: var(--font-caveat), cursive;
+  --font-title-vogue: var(--font-bodoni), Didot, "Bodoni 72", serif;
+
+  /* Previous text fonts, still loaded if you want them back:
+     var(--font-montserrat), var(--font-plex-mono), var(--font-abril),
+     var(--font-bodoni), var(--font-playfair), var(--font-caveat) */
 }
 
 :root {
@@ -80,21 +91,21 @@
     padding: 0 0.06em;
   }
   .script {
-    font-family: var(--font-script);
+    font-family: var(--font-body);
     font-weight: 400;
     font-style: normal;
     letter-spacing: 0;
     font-size: 1.06em;
   }
   .retro {
-    font-family: var(--font-retro);
+    font-family: var(--font-body);
     font-weight: 400;
     font-style: normal;
     letter-spacing: 0.005em;
     color: var(--color-cream);
   }
   .retro-ink {
-    font-family: var(--font-retro);
+    font-family: var(--font-body);
     font-weight: 400;
     color: var(--color-wine);
   }
@@ -113,6 +124,17 @@
     font-family: var(--font-vogue);
     font-style: italic;
     font-weight: 500;
+  }
+  /* Titles keep their display fonts; the same classes elsewhere use the body font. */
+  :is(h1, h2).retro,
+  :is(h1, h2, .headline) :is(.retro, .retro-ink) {
+    font-family: var(--font-retro);
+  }
+  :is(h1, h2, .headline) .script {
+    font-family: var(--font-script);
+  }
+  h1 .vg {
+    font-family: var(--font-title-vogue);
   }
   .seasons {
     font-family: var(--font-seasons);
