@@ -3,6 +3,16 @@
 import { useEffect, useRef, type KeyboardEvent, type PointerEvent } from "react";
 import { BADGE } from "@/content/about";
 
+export type BadgeInfo = typeof BADGE;
+
+interface Props {
+  /** Badge text. Defaults to the About page badge. */
+  info?: BadgeInfo;
+  /** Optional ID photo (a transparent PNG cutout works best). Makes the card taller. */
+  photo?: string;
+  photoAlt?: string;
+}
+
 interface Body {
   x: number;
   y: number;
@@ -24,7 +34,8 @@ const CARD_HALF_W = 115;
  * gives it a nudge. Physics writes straight to the DOM (no re-render per frame)
  * and the loop sleeps once the badge settles.
  */
-export default function LanyardBadge() {
+export default function LanyardBadge({ info = BADGE, photo, photoAlt = "" }: Props = {}) {
+  const cardH = photo ? 430 : 330;
   const stage = useRef<HTMLDivElement>(null);
   const card = useRef<HTMLDivElement>(null);
   const strandA = useRef<SVGPathElement>(null);
@@ -40,7 +51,7 @@ export default function LanyardBadge() {
     let running = false;
     let last = 0;
 
-    const ropeLen = () => Math.min(240, Math.max(180, st.clientHeight - 360));
+    const ropeLen = () => Math.min(240, Math.max(180, st.clientHeight - cardH - 30));
 
     const step = (dt: number) => {
       const W = st.clientWidth;
@@ -150,7 +161,7 @@ export default function LanyardBadge() {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [cardH]);
 
   const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
     const st = stage.current;
@@ -202,7 +213,7 @@ export default function LanyardBadge() {
   };
 
   return (
-    <div ref={stage} className="badge-stage">
+    <div ref={stage} className={photo ? "badge-stage badge-stage--photo" : "badge-stage"}>
       <svg className="badge-rope" aria-hidden="true">
         <path ref={strandA} d="" fill="none" stroke="#F8F1E7" strokeWidth="10" strokeLinecap="round" />
         <path ref={strandB} d="" fill="none" stroke="#F8F1E7" strokeWidth="10" strokeLinecap="round" />
@@ -218,10 +229,10 @@ export default function LanyardBadge() {
       </svg>
       <div
         ref={card}
-        className="badge"
+        className={photo ? "badge badge--photo" : "badge"}
         role="button"
         tabIndex={0}
-        aria-label={BADGE.aria}
+        aria-label={info.aria}
         onPointerDown={onPointerDown}
         onKeyDown={onKeyDown}
       >
@@ -239,25 +250,31 @@ export default function LanyardBadge() {
         <div className="sleeve">
           <div className="badge-card">
             <div className="mono flex justify-between text-[8.5px] font-semibold tracking-[.14em] opacity-75">
-              <span>{BADGE.top}</span>
-              <span>{BADGE.no}</span>
+              <span>{info.top}</span>
+              <span>{info.no}</span>
             </div>
-            <div className="mt-2.5 leading-[.86]">
-              <div className="font-body text-[46px] tracking-[-.02em]">{BADGE.first}</div>
+            {photo && (
+              <div className="badge-photo">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={photo} alt={photoAlt} draggable={false} />
+              </div>
+            )}
+            <div className={photo ? "mt-1 leading-[.86]" : "mt-2.5 leading-[.86]"}>
+              <div className="font-body text-[46px] tracking-[-.02em]">{info.first}</div>
               <div className="mt-1 pl-1.5 font-body text-[29px] italic whitespace-nowrap text-wine">
-                {BADGE.last}
+                {info.last}
               </div>
             </div>
             <div className="flex-1" />
-            <div className="mono text-[8px] tracking-[.16em] opacity-60">{BADGE.currentlyLabel}</div>
+            <div className="mono text-[8px] tracking-[.16em] opacity-60">{info.currentlyLabel}</div>
             <div className="text-[11.5px] leading-[1.3] font-bold">
-              {BADGE.currently}
+              {info.currently}
               <br />
-              <span className="font-medium">{BADGE.role}</span>
+              <span className="font-medium">{info.role}</span>
             </div>
-            <div className="mono mt-1 text-[8px] tracking-[.16em] opacity-60">{BADGE.alsoLabel}</div>
+            <div className="mono mt-1 text-[8px] tracking-[.16em] opacity-60">{info.alsoLabel}</div>
             <div className="flex flex-wrap gap-[5px]">
-              {BADGE.also.map((a, i) => (
+              {info.also.map((a, i) => (
                 <span
                   key={a}
                   className={`rounded-full px-2 py-[3px] text-[8.5px] font-bold tracking-[.04em] text-cream ${i ? "bg-wine" : "bg-deep"}`}
@@ -268,13 +285,13 @@ export default function LanyardBadge() {
             </div>
             <div className="mt-1.5 flex items-center gap-2 border-t border-dashed border-deep/30 pt-2">
               <span aria-hidden="true" className="badge-barcode h-4 flex-1" />
-              <span className="mono text-[8px] font-semibold tracking-[.12em]">{BADGE.place}</span>
+              <span className="mono text-[8px] font-semibold tracking-[.12em]">{info.place}</span>
             </div>
           </div>
         </div>
       </div>
       <span className="badge-hint" aria-hidden="true">
-        {BADGE.hint}
+        {info.hint}
       </span>
     </div>
   );

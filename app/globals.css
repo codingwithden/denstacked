@@ -1461,3 +1461,148 @@
     }
   }
 }
+
+/* ------------------------------------------------------------------
+   "Launching soon" cover (content/comingSoon.ts). */
+@layer components {
+  .cover {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(248, 241, 231, 0.1), transparent 60%),
+      linear-gradient(100deg, #7a3a40 0%, var(--color-wine) 45%, var(--color-deep) 100%);
+  }
+  .cover-inner {
+    width: 100%;
+    max-width: 1120px;
+    padding: 0 16px 48px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 32px;
+  }
+  .cover-copy {
+    flex: 1 1 460px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    color: var(--color-cream);
+  }
+  .cover-name {
+    margin: 0;
+    font-family: var(--font-script);
+    font-weight: 400;
+    font-size: clamp(54px, 7.4vw, 100px);
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+  .cover-handle {
+    display: block;
+    font-size: 0.55em;
+    opacity: 0.85;
+    margin-top: 0.1em;
+  }
+  .cover-roles {
+    margin: 0;
+    max-width: 560px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: clamp(19px, 1.9vw, 24px);
+    line-height: 1.5;
+    color: rgba(248, 241, 231, 0.92);
+  }
+  .cover-soon {
+    margin: 0;
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-size: clamp(22px, 2.3vw, 30px);
+    letter-spacing: 0.02em;
+  }
+  .cover-dots span {
+    animation: coverDot 1.4s infinite both;
+  }
+  .cover-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .cover-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  .cover-mail {
+    align-self: flex-start;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 15px;
+    color: rgba(248, 241, 231, 0.75);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.2s;
+  }
+  .cover-mail:hover {
+    color: var(--color-cream);
+  }
+
+  /* Photo version of the lanyard badge. */
+  .badge-stage--photo {
+    height: 680px;
+  }
+  .badge.badge--photo {
+    height: 430px;
+  }
+  .badge-stage--photo .badge-hint {
+    bottom: 16px;
+  }
+  .badge-photo {
+    position: relative;
+    height: 150px;
+    margin: 4px -4px 2px;
+    border-radius: 6px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 38%, rgba(248, 241, 231, 0.28), transparent 62%),
+      var(--color-wine);
+  }
+  .badge-photo img {
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    width: 150%;
+    max-width: none;
+    transform: translateX(-50%);
+    pointer-events: none;
+    user-select: none;
+  }
+  @media (max-width: 700px) {
+    .cover {
+      align-items: flex-start;
+    }
+    .badge-stage.badge-stage--photo {
+      height: 560px;
+    }
+    .badge-stage--photo .badge-hint {
+      display: none;
+    }
+    .cover-copy {
+      text-align: center;
+      align-items: center;
+    }
+    .cover-mail {
+      align-self: center;
+    }
+  }
+}
+
+@keyframes coverDot {
+  0%,
+  20% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}
