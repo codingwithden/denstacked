@@ -10,7 +10,7 @@ import "./globals.css";
 
 export const metadata: Metadata = COMING_SOON
   ? {
-      title: { absolute: `${COVER.name} ${COVER.handle} · Launching soon` },
+      title: { absolute: `${COVER.first} ${COVER.last} ${COVER.handle} · Launching soon` },
       description: COVER.roles,
     }
   : {

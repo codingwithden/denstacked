@@ -35,7 +35,7 @@ const CARD_HALF_W = 115;
  * and the loop sleeps once the badge settles.
  */
 export default function LanyardBadge({ info = BADGE, photo, photoAlt = "" }: Props = {}) {
-  const cardH = photo ? 430 : 330;
+  const cardH = photo ? 450 : 330;
   const stage = useRef<HTMLDivElement>(null);
   const card = useRef<HTMLDivElement>(null);
   const strandA = useRef<SVGPathElement>(null);
@@ -259,7 +259,7 @@ export default function LanyardBadge({ info = BADGE, photo, photoAlt = "" }: Pro
                 <img src={photo} alt={photoAlt} draggable={false} />
               </div>
             )}
-            <div className={photo ? "mt-1 leading-[.86]" : "mt-2.5 leading-[.86]"}>
+            <div className={photo ? "badge-name--photo mt-1 leading-[.86]" : "mt-2.5 leading-[.86]"}>
               <div className="font-body text-[46px] tracking-[-.02em]">{info.first}</div>
               <div className="mt-1 pl-1.5 font-body text-[29px] italic whitespace-nowrap text-wine">
                 {info.last}

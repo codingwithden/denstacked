@@ -5,6 +5,7 @@ import {
   Caveat,
   Gloock,
   IBM_Plex_Mono,
+  Italiana,
   Montserrat,
   Pinyon_Script,
   Playfair_Display,
@@ -62,6 +63,14 @@ export const playfair = Playfair_Display({
   display: "swap",
 });
 
+// Thin high-contrast caps for the "launching soon" cover name. (Safira March-style)
+export const italiana = Italiana({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-italiana",
+  display: "swap",
+});
+
 // Body / UI.
 export const montserrat = Montserrat({
   subsets: ["latin"],
@@ -87,6 +96,6 @@ export const caveat = Caveat({
   display: "swap",
 });
 
-export const fontVariables = [bagel, gloock, pinyon, abril, bodoni, playfair, montserrat, plexMono, caveat]
+export const fontVariables = [bagel, gloock, pinyon, abril, bodoni, playfair, montserrat, plexMono, caveat, italiana]
   .map((f) => f.variable)
   .join(" ");

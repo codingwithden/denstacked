@@ -11,12 +11,12 @@ import type { BadgeInfo } from "@/components/about/LanyardBadge";
 export const COMING_SOON = process.env.SHOW_FULL_SITE !== "true";
 
 export const COVER = {
-  name: "Denisse Medina Flores",
+  first: "Denisse",
+  last: "Medina Flores",
   handle: "(Denstacked)",
   roles: "Founder @ Work & Brew, Small Business Owner & Product Manager @ DDD Social Media Agency",
-  soon: "launching soon",
-  email: "denissemedinaflores@gmail.com",
-  emailLabel: "Say hello",
+  soon: "LAUNCHING SOON",
+  side: "BRONX · NYC · NO. 001",
   photo: "/images/den-badge.png",
   photoAlt: "Denisse smiling and throwing up a peace sign",
 };
