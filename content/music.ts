@@ -9,8 +9,10 @@ export const MUSIC = {
   url: "",
   /** Where "Now playing" sends people: the original video. */
   youtube: "https://www.youtube.com/watch?v=Yu7zZvH60ag",
-  /** 0–1, so it sits under the page instead of over it. */
-  volume: 0.5,
+  /** 0–1, kept low so it sits under the page instead of over it. */
+  volume: 0.3,
+  /** Seconds to fade in when play is pressed, so it never starts abruptly. */
+  fadeIn: 2,
   play: "PLAY MUSIC",
   playing: "NOW PLAYING",
   openVideo: "Now playing. Open the song on YouTube (new tab)",

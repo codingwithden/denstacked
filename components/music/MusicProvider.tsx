@@ -43,8 +43,18 @@ export default function MusicProvider({ available, children }: { available: bool
       audio.current = a;
     }
     const a = audio.current;
-    if (a.paused) a.play().catch(() => setStatus("paused"));
-    else a.pause();
+    if (a.paused) {
+      // Soft start: begin silent and ease up to the background level.
+      a.volume = 0;
+      a.play().catch(() => setStatus("paused"));
+      const steps = 20;
+      let i = 0;
+      const id = window.setInterval(() => {
+        i += 1;
+        a.volume = Math.min(MUSIC.volume, (MUSIC.volume * i) / steps);
+        if (i >= steps || a.paused) window.clearInterval(id);
+      }, (MUSIC.fadeIn * 1000) / steps);
+    } else a.pause();
   }, [available]);
 
   const pause = useCallback(() => {
