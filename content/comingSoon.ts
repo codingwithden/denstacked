@@ -30,7 +30,7 @@ export const COVER_BADGE: BadgeInfo = {
   currently: "Founder @ Work & Brew",
   role: "Product Manager @ DDD Social Media Agency",
   alsoLabel: "ALSO RUNNING",
-  also: ["Small Business Owner", "2027 Training"],
+  also: ["Small Business Owner", "Hybrid Athlete '27"],
   place: "BRONX · NYC",
   hint: "grab my badge ↗",
   aria: "Den's ID badge. Drag it or press Enter to give it a swing.",
