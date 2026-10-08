@@ -30,11 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${fontVariables} antialiased`}>
       <body>
-        {COMING_SOON ? (
-          <ComingSoon />
-        ) : (
-          <MusicProvider available={hasMusic}>{children}</MusicProvider>
-        )}
+        <MusicProvider available={hasMusic}>{COMING_SOON ? <ComingSoon /> : children}</MusicProvider>
       </body>
     </html>
   );

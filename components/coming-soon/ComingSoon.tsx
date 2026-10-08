@@ -1,4 +1,5 @@
 import LanyardBadge from "@/components/about/LanyardBadge";
+import CoverMusicButton from "@/components/music/CoverMusicButton";
 import { COVER, COVER_BADGE } from "@/content/comingSoon";
 
 /**
@@ -10,6 +11,7 @@ export default function ComingSoon() {
     <main className="cover">
       <section className="cover-badge">
         <LanyardBadge info={COVER_BADGE} photo={COVER.photo} photoAlt={COVER.photoAlt} />
+        <CoverMusicButton />
         <span className="cover-side" aria-hidden="true">
           {COVER.side}
         </span>

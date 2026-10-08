@@ -1497,6 +1497,44 @@
     letter-spacing: 0.7em;
     color: rgba(248, 241, 231, 0.8);
   }
+  .cover-music {
+    position: absolute;
+    left: 50%;
+    /* Just under where the badge comes to rest (matches LanyardBadge rope length + card height). */
+    top: calc(clamp(180px, 100% - 480px, 240px) + 428px);
+    transform: translateX(-50%);
+    z-index: 6;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 12px 22px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--color-cream);
+    color: var(--color-wine);
+    font-family: var(--font-montserrat), sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    white-space: nowrap;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  @media (max-height: 820px) {
+    .badge-stage--photo .badge-hint {
+      display: none;
+    }
+  }
+  .cover-music:hover {
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35);
+  }
+  .cover-music[aria-pressed="true"] {
+    background: transparent;
+    color: var(--color-cream);
+    box-shadow: inset 0 0 0 1.5px rgba(248, 241, 231, 0.7);
+  }
   .cover-copy {
     flex: 1 1 auto;
     min-width: 0;
@@ -1606,8 +1644,9 @@
       flex: 0 0 auto;
     }
     .cover-badge .badge-stage {
-      min-height: 600px;
+      min-height: 680px;
     }
+
     .cover-side {
       display: none;
     }

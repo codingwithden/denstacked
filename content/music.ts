@@ -15,5 +15,6 @@ export const MUSIC = {
   playing: "NOW PLAYING",
   openVideo: "Now playing. Open the song on YouTube (new tab)",
   pause: "Pause music",
+  pauseLabel: "PAUSE MUSIC",
   resume: "Play music",
 };
